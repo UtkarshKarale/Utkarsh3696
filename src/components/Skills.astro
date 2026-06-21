@@ -1,0 +1,30 @@
+---
+const skills = [
+  { category: "Programming Languages", items: ["Java", "Python", "C++", "C", "JavaScript", "PHP", "SQL", "PL/SQL", "Scala"] },
+  { category: "Frontend Development", items: ["React", "Redux", "Astro", "Tailwind CSS", "Bootstrap", "HTML", "CSS", "SASS", "Thymeleaf"] },
+  { category: "Backend & Frameworks", items: ["Node.js", "Express", "Spring Boot", "Spring Framework", "Hibernate", "Jakarta EE", "JDBC", "REST APIs", "XML", "JSON"] },
+  { category: "DevOps & Tools", items: ["DevOps", "GitHub", "GitLab", "CI/CD", "Cloudflare Workers", "Postman"] },
+  { category: "Core Concepts", items: ["Data Structures", "Algorithms", "Object-Oriented Programming (OOP)", "Machine Learning", "Web Applications"] },
+];
+---
+
+<section id="skills" class="py-20 border-t border-gray-100">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">Technical Skills</h2>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      {skills.map(skillGroup => (
+        <div>
+          <h3 class="text-lg font-bold text-gray-900 mb-4">{skillGroup.category}</h3>
+          <ul class="flex flex-wrap gap-2">
+            {skillGroup.items.map(item => (
+              <li class="inline-flex items-center rounded-md bg-gray-50 px-3 py-1 text-sm font-medium text-gray-700 border border-gray-200">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

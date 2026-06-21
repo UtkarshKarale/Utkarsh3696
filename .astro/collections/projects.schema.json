@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "coverImage": {
+      "type": "string"
+    },
+    "technologies": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "github": {
+      "type": "string",
+      "format": "uri"
+    },
+    "liveUrl": {
+      "type": "string",
+      "format": "uri"
+    },
+    "featured": {
+      "default": false,
+      "type": "boolean"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "$schema": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "description"
+  ]
+}

@@ -1,0 +1,31 @@
+---
+const experiences = [
+  {
+    role: "Full-Stack Developer",
+    company: "TwoDots Software Solution (www.2dots.io)",
+    period: "Oct 2024 - Present",
+    description: "Leading the development of minimal, high-performance digital products and scalable web applications."
+  }
+];
+---
+
+<section id="experience" class="py-20 border-t border-gray-100">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">Experience</h2>
+    
+    <div class="space-y-8">
+      {experiences.map((exp) => (
+        <div>
+          <div class="flex flex-col md:flex-row md:items-baseline justify-between mb-2">
+            <h3 class="text-lg font-bold text-gray-900">{exp.role}</h3>
+            <span class="text-sm text-gray-500 font-medium">{exp.period}</span>
+          </div>
+          <div class="text-gray-900 font-medium mb-3">{exp.company}</div>
+          <p class="text-gray-600 leading-relaxed text-sm">
+            {exp.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+                                                          ---
+import BaseLayout from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(p => !p.data.draft)
+  .sort((a, b) => new Date(b.data.publishedAt).valueOf() - new Date(a.data.publishedAt).valueOf());
+---
+
+<BaseLayout 
+  title="Utkarsh Knows | Blog by Utkarsh Karale" 
+  description="Thoughts on software engineering, product design, AI automation, and building the web by Utkarsh Karale."
+>
+  <Header />
+  
+  <div class="pt-32 pb-20 max-w-4xl mx-auto px-6">
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Utkarsh Knows</h1>
+      <p class="text-lg text-gray-600 max-w-2xl">
+        Thoughts on software engineering, product design, and building the web.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {publishedPosts.map(post => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+  </div>
+  
+  <Footer />
+</BaseLayout>

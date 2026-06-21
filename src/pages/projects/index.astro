@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const sortedProjects = allProjects.sort((a, b) => {
+  if (a.data.featured && !b.data.featured) return -1;
+  if (!a.data.featured && b.data.featured) return 1;
+  return new Date(b.data.publishedAt || 0).valueOf() - new Date(a.data.publishedAt || 0).valueOf();
+});
+---
+
+<BaseLayout 
+  title="Utkarsh Develops | Projects by Utkarsh Karale"
+  description="Explore the portfolio of Utkarsh Karale, featuring robust web applications, AI tools, and full-stack projects like Monitoro, SuddhaInbox, and Cartext AI."
+>
+  <Header />
+  
+  <div class="pt-32 pb-20 max-w-4xl mx-auto px-6">
+    <div class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Utkarsh Develops</h1>
+      <p class="text-lg text-gray-600 max-w-2xl">
+        Things Utkarsh builds when he has free time in life.
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-6">
+      {sortedProjects.map(project => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </div>
+  
+  <Footer />
+</BaseLayout>

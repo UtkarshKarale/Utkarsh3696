@@ -1,0 +1,233 @@
+---
+---
+<!-- Outer Cursor (Lens/Text Container) -->
+<div id="unique-cursor" aria-hidden="true">
+  <span id="cursor-text" class="text-[10px] font-bold uppercase tracking-widest text-black opacity-0 transition-opacity duration-300"></span>
+</div>
+
+<!-- Orbiting colored dots -->
+<div id="orbit-wrapper" aria-hidden="true">
+  <div id="orbit-spinner">
+    <div class="orbit-dot bg-red-400" style="--angle: 0deg;"></div>
+    <div class="orbit-dot bg-blue-400" style="--angle: 90deg;"></div>
+    <div class="orbit-dot bg-emerald-400" style="--angle: 180deg;"></div>
+    <div class="orbit-dot bg-amber-400" style="--angle: 270deg;"></div>
+  </div>
+</div>
+
+<!-- Inner Cursor Dot Variant -->
+<div id="cursor-dot" aria-hidden="true"></div>
+
+<style>
+  @media (pointer: fine) {
+    html, html * { cursor: none !important; }
+  }
+
+  /* Outer Cursor Base */
+  #unique-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border-radius: 50%;
+    background-color: white;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform, width, height, background-color;
+    transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                margin 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Standard Inverted Hover */
+  #unique-cursor.ck-hover {
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+  }
+
+  /* Colored Hover (For Socials & Menus) */
+  #unique-cursor.ck-color-hover {
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    mix-blend-mode: normal; /* Remove difference to show actual colors */
+    opacity: 0.8;
+  }
+
+  /* Text inside cursor variant (For Projects) */
+  #unique-cursor.ck-text-hover {
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    background-color: white !important; 
+    mix-blend-mode: normal; 
+    border: 1px solid #e5e7eb;
+  }
+  
+  #unique-cursor.ck-text-hover #cursor-text {
+    opacity: 1;
+  }
+
+  /* Inner Dot Variant */
+  #cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    background-color: black;
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform;
+    transition: opacity 0.2s ease;
+  }
+  
+  .ck-hover ~ #cursor-dot,
+  .ck-color-hover ~ #cursor-dot,
+  .ck-text-hover ~ #cursor-dot {
+    opacity: 0;
+  }
+
+  /* Orbiting Dots System */
+  #orbit-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    margin: -25px 0 0 -25px;
+    pointer-events: none;
+    z-index: 999998;
+    will-change: transform;
+    transition: opacity 0.3s ease;
+  }
+
+  #orbit-spinner {
+    width: 100%;
+    height: 100%;
+    animation: spin 3s linear infinite;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin: -3px 0 0 -3px;
+    border-radius: 50%;
+    transform: rotate(var(--angle)) translateY(-20px);
+  }
+
+  @keyframes spin {
+    100% { transform: rotate(360deg); }
+  }
+
+  .ck-hover ~ #orbit-wrapper,
+  .ck-color-hover ~ #orbit-wrapper,
+  .ck-text-hover ~ #orbit-wrapper {
+    opacity: 0;
+  }
+</style>
+
+<script>
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  
+  const cursor = document.getElementById('unique-cursor');
+  const cursorText = document.getElementById('cursor-text');
+  const dot = document.getElementById('cursor-dot');
+  const orbitWrapper = document.getElementById('orbit-wrapper');
+  
+  if (!cursor || !dot || !orbitWrapper) return;
+
+  let mouseX = -100;
+  let mouseY = -100;
+  
+  let cursorX = -100;
+  let cursorY = -100;
+  let orbitX = -100;
+  let orbitY = -100;
+
+  const cursorSpeed = 0.15;
+  const orbitSpeed = 0.10; 
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    
+    const target = e.target as HTMLElement;
+    
+    // Check for specific link types
+    const linkHit = target.closest('a');
+    const buttonHit = target.closest('button, [role="button"]');
+    const headerHit = target.closest('h1, h2');
+    
+    // Reset classes
+    cursor.className = '';
+    cursor.style.backgroundColor = 'white';
+    if (cursorText) cursorText.textContent = "";
+
+    if (linkHit) {
+      const href = linkHit.getAttribute('href') || '';
+      const text = linkHit.textContent?.toLowerCase() || '';
+      
+      // Project / Blog card logic
+      if (href.startsWith('/projects/') || href.startsWith('/blog/')) {
+        cursor.classList.add('ck-text-hover');
+        if (cursorText) cursorText.textContent = "VIEW";
+      } 
+      // Social Media Colors
+      else if (href.includes('github.com') || text.includes('github')) {
+        cursor.classList.add('ck-color-hover');
+        cursor.style.backgroundColor = '#181717'; // GitHub Dark Gray
+      }
+      else if (href.includes('twitter.com') || href.includes('x.com') || text.includes('twitter')) {
+        cursor.classList.add('ck-color-hover');
+        cursor.style.backgroundColor = '#1DA1F2'; // Twitter Blue
+      }
+      else if (href.includes('linkedin.com') || text.includes('linkedin')) {
+        cursor.classList.add('ck-color-hover');
+        cursor.style.backgroundColor = '#0A66C2'; // LinkedIn Blue
+      }
+      // Menu Items (Nav links)
+      else if (linkHit.closest('nav')) {
+        cursor.classList.add('ck-color-hover');
+        cursor.style.backgroundColor = '#f59e0b'; // Amber / Yellow
+      }
+      // General Links
+      else {
+        cursor.classList.add('ck-hover');
+      }
+    } else if (buttonHit || headerHit) {
+      cursor.classList.add('ck-hover');
+    }
+  });
+
+  function animate() {
+    cursorX += (mouseX - cursorX) * cursorSpeed;
+    cursorY += (mouseY - cursorY) * cursorSpeed;
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+
+    orbitX += (mouseX - orbitX) * orbitSpeed;
+    orbitY += (mouseY - orbitY) * orbitSpeed;
+    orbitWrapper.style.transform = `translate3d(${orbitX}px, ${orbitY}px, 0)`;
+
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+})();
+</script>

@@ -1,0 +1,74 @@
+---
+import '../styles/global.css';
+import CustomCursor from '../components/CustomCursor.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL;
+  type?: 'website' | 'article';
+}
+
+const {
+  title = 'Utkarsh Karale — Full-Stack Developer & Product Builder',
+  description = 'Premium modern portfolio website and blog.',
+  image = '/og-image.png',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.com'),
+  type = 'website',
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? 'BlogPosting' : 'WebSite',
+  "name": title,
+  "description": description,
+  "url": canonicalURL,
+  "image": new URL(image, Astro.site || 'https://example.com'),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || 'https://example.com')} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || 'https://example.com')} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-white text-gray-900 font-sans antialiased min-h-screen flex flex-col relative">
+    <!-- Minimal Light Background Effect (Dot Pattern) -->
+    <div class="fixed inset-0 z-[-1] h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
+    
+    <CustomCursor />
+    <main class="flex-grow">
+      <slot />
+    </main>
+  </body>
+</html>

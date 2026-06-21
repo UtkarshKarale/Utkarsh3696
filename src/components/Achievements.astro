@@ -1,0 +1,74 @@
+---
+const achievements = [
+  {
+    title: "Spotlight Award",
+    organization: "TwoDots Software Solution",
+    description: "Awarded for innovative work in AI automation, leading the creation of impactful tools like Clipman and Status AI. Recognized for creativity, ownership, and a forward-thinking mindset.",
+    image: "https://media.licdn.com/dms/image/v2/D4D22AQGjY4CRfCc0Uw/feedshare-shrink_800/B4DZoQuwHdG8Ag-/0/1761217283618?e=1783555200&v=beta&t=0G4oTtzP6FikaT_zQyPhFRHVPesq-197ICe8H6SOW9Q",
+    link: ""
+  },
+  {
+    title: "AI Excellence Award – Vision to Execution",
+    organization: "TwoDots Software Solution",
+    description: "Honoured to receive the AI Excellence Award from Mayur Patil. Grateful for the recognition of my vision-to-execution approach and dedication to excellence in AI.",
+    image: "",
+    link: "https://www.linkedin.com/posts/utkarshkarale_appreciation-award-activity-7336591327008067584-apst?utm_source=share&utm_medium=member_desktop&rcm=ACoAADc5_yoBWQoxh9czRRwd2tOVLHPO-pEtIR8"
+  },
+  {
+    title: "Young Turks Merit Certificate",
+    organization: "Naukri Campus",
+    description: "Achievement unlocked! Proud to receive this recognition, which fuels my passion for continuous growth and innovation in my career.",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQEdi04nWG39cQ/feedshare-shrink_800/feedshare-shrink_800/0/1729332694015?e=1783555200&v=beta&t=pFBEt8EGuNgMVF3Hxl4tQ6GWiBvhf62phlkMryG4i9I",
+    link: ""
+  },
+  {
+    title: "Star Coder of the Week",
+    organization: "Qspiders",
+    description: "Celebrating my Star Coder of the Week award! Proud to be part of a community that fosters growth and innovation. My love for coding only gets stronger every day!",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQFvF9OmLchDtg/feedshare-shrink_800/feedshare-shrink_800/0/1721373480329?e=1783555200&v=beta&t=04cuyMngSAsqWqk6DJ1GvmTx71V3dSm_kwBRCxzROjM",
+    link: ""
+  },
+  {
+    title: "3rd Prize - Project Competition",
+    organization: "AMGOI Vathar, Kolhapur (REFLEX Event)",
+    description: "Secured the 3rd Prize in the college-level Project Competition at the REFLEX event held at Ashokrao Mane Group of Institutions (AMGOI), Vathar, Kolhapur.",
+    image: "",
+    link: ""
+  }
+];
+---
+
+<section id="achievements" class="py-20 border-t border-gray-100">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-2xl font-bold text-gray-900 mb-8">Achievements & Awards</h2>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      {achievements.map(achievement => (
+        <div class="group flex flex-col bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 hover:-translate-y-1">
+          {achievement.image ? (
+            <div class="h-48 w-full overflow-hidden bg-gray-50 border-b border-gray-100 relative">
+              <img src={achievement.image} alt={achievement.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            </div>
+          ) : (
+            <div class="h-48 w-full bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-6 text-center border-b border-gray-900 relative overflow-hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/10 absolute -right-4 -bottom-4 w-40 h-40 transform -rotate-12"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              <h3 class="text-2xl font-bold text-white relative z-10 drop-shadow-md">{achievement.title}</h3>
+            </div>
+          )}
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="text-xl font-bold text-gray-900 mb-1">{achievement.title}</h3>
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">{achievement.organization}</p>
+            <p class="text-gray-600 text-sm leading-relaxed mb-6">{achievement.description}</p>
+            
+            {achievement.link && (
+              <a href={achievement.link} target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">
+                View Post 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
