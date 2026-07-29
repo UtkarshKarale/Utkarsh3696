@@ -1,0 +1,564 @@
+---
+import WebSticklyLayout from '../../layouts/WebSticklyLayout.astro';
+import WebSticklyDemoScript from '../../components/WebSticklyDemoScript.astro';
+---
+
+<WebSticklyLayout 
+  title="Privacy Policy — WebStickly"
+  description="WebStickly is local-first and privacy-first. Zero servers, zero tracking. Read our full privacy policy."
+>
+
+  <div class="pp-hero">
+    <div class="pp-hero-glow"></div>
+    <div class="pp-hero-inner">
+      <div class="pp-shield-wrap">
+        <svg class="pp-shield-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="pp-date-badge">Effective Date: July 28, 2026</div>
+      <h1 class="pp-title">Privacy Policy</h1>
+      <p class="pp-subtitle">WebStickly was built on a single promise: <strong>your notes never leave your device.</strong> No servers. No tracking. No compromises.</p>
+    </div>
+  </div>
+
+  <!-- Zero Data Guarantee Callout -->
+  <div class="pp-guarantee-wrap">
+    <div class="pp-guarantee">
+      <div class="pp-guarantee-icon">🔐</div>
+      <div>
+        <div class="pp-guarantee-title">Zero Data Guarantee</div>
+        <div class="pp-guarantee-body">WebStickly collects <strong>zero personal data</strong>. Notes, URLs, and preferences are stored only in your browser — never transmitted, never logged, never sold.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content grid: TOC + Sections -->
+  <div class="pp-layout">
+
+    <!-- Sticky Table of Contents -->
+    <aside class="pp-toc">
+      <div class="pp-toc-card">
+        <div class="pp-toc-title">Contents</div>
+        <nav>
+          <a href="#s1" class="pp-toc-link">1. Information Collection</a>
+          <a href="#s2" class="pp-toc-link">2. Local Storage Model</a>
+          <a href="#s3" class="pp-toc-link">3. AES-GCM Encryption</a>
+          <a href="#s4" class="pp-toc-link">4. Permissions</a>
+          <a href="#s5" class="pp-toc-link">5. Third-Party Services</a>
+          <a href="#s6" class="pp-toc-link">6. Policy Changes</a>
+          <a href="#s7" class="pp-toc-link">7. Contact</a>
+        </nav>
+        <div class="pp-toc-footer">
+          <a href="/webstickly" class="pp-toc-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Back to WebStickly
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Policy Sections -->
+    <main class="pp-sections">
+
+      <!-- Section 1 -->
+      <section id="s1" class="pp-card pp-card-yellow">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-yellow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
+          </div>
+          <h2 class="pp-card-title">1. Information Collection and Use</h2>
+        </div>
+        <p class="pp-text">WebStickly operates on a <strong class="pp-highlight">local-first privacy model</strong>. Here is an exhaustive list of what we collect:</p>
+        <div class="pp-none-box">
+          <span class="pp-none-icon">∅</span>
+          <span>Absolutely nothing.</span>
+        </div>
+        <p class="pp-text pp-text-sm">We do not collect, transmit, or process any personally identifiable information, browsing history, keystroke data, or analytics of any kind. No account creation is required to use WebStickly.</p>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="s2" class="pp-card pp-card-blue">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h2 class="pp-card-title">2. Local Storage Model</h2>
+        </div>
+        <p class="pp-text">All data created by WebStickly is stored exclusively inside your browser using Chrome's built-in <code class="pp-code">chrome.storage.local</code> API:</p>
+        <ul class="pp-list">
+          <li><span class="pp-list-dot pp-dot-blue"></span><span><strong>Note content</strong> — The text you type into each sticky note</span></li>
+          <li><span class="pp-list-dot pp-dot-blue"></span><span><strong>Note metadata</strong> — Position (x/y), size, color, minimized state</span></li>
+          <li><span class="pp-list-dot pp-dot-blue"></span><span><strong>Page binding</strong> — The URL each note is pinned to (stored locally only)</span></li>
+          <li><span class="pp-list-dot pp-dot-blue"></span><span><strong>User profile</strong> — Display name and initials you set in the extension popup</span></li>
+        </ul>
+        <p class="pp-text pp-text-sm">This data lives entirely within your browser's sandboxed storage. Uninstalling WebStickly removes all data permanently.</p>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="s3" class="pp-card pp-card-green">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-green">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h2 class="pp-card-title">3. AES-GCM Encryption for Exports</h2>
+        </div>
+        <p class="pp-text">When you use the <strong>"Backup All"</strong> export feature, your notes are exported as a <code class="pp-code">.ws.json</code> file that is encrypted locally using industry-standard:</p>
+        <div class="pp-algo-box">
+          <div class="pp-algo-label">Encryption Algorithm</div>
+          <div class="pp-algo-value">AES-GCM · 256-bit key</div>
+          <div class="pp-algo-note">Executed entirely in your browser via the Web Crypto API. No key is ever transmitted.</div>
+        </div>
+        <p class="pp-text pp-text-sm">Exported backup files remain under your sole control on your device. We have no remote access and cannot decrypt your data.</p>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="s4" class="pp-card pp-card-purple">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-purple">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+          </div>
+          <h2 class="pp-card-title">4. Permissions Required</h2>
+        </div>
+        <p class="pp-text">WebStickly requests only the minimum permissions necessary to function. Here is what each permission does:</p>
+        <div class="pp-perms">
+          <div class="pp-perm">
+            <code class="pp-code pp-code-lg">storage</code>
+            <p class="pp-perm-desc">Stores your sticky notes, positions, colors, and profile locally in <code class="pp-code">chrome.storage.local</code>. This data never leaves your device.</p>
+          </div>
+          <div class="pp-perm">
+            <code class="pp-code pp-code-lg">activeTab</code>
+            <p class="pp-perm-desc">Allows WebStickly to inject note UI onto the webpage you are currently viewing — only when you actively trigger it via <kbd class="pp-kbd">Alt + N</kbd>.</p>
+          </div>
+          <div class="pp-perm">
+            <code class="pp-code pp-code-lg">tabs</code>
+            <p class="pp-perm-desc">Used to read the current tab's URL to correctly bind and retrieve notes for each unique webpage.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5 -->
+      <section id="s5" class="pp-card pp-card-neutral">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-neutral">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h2 class="pp-card-title">5. Third-Party Services</h2>
+        </div>
+        <p class="pp-text">WebStickly <strong>version 1.0.0</strong> does not integrate with any third-party services. This includes:</p>
+        <ul class="pp-list">
+          <li><span class="pp-list-dot pp-dot-neutral"></span><span>No analytics platforms (Google Analytics, Mixpanel, etc.)</span></li>
+          <li><span class="pp-list-dot pp-dot-neutral"></span><span>No advertising networks</span></li>
+          <li><span class="pp-list-dot pp-dot-neutral"></span><span>No crash reporting services</span></li>
+          <li><span class="pp-list-dot pp-dot-neutral"></span><span>No external API calls of any kind</span></li>
+        </ul>
+      </section>
+
+      <!-- Section 6 -->
+      <section id="s6" class="pp-card pp-card-neutral">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-neutral">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h2 class="pp-card-title">6. Changes to This Privacy Policy</h2>
+        </div>
+        <p class="pp-text">We may update this Privacy Policy as WebStickly evolves. Any changes will be reflected on this page with an updated Effective Date. We will not retroactively reduce user privacy protections without explicit notice.</p>
+      </section>
+
+      <!-- Section 7 -->
+      <section id="s7" class="pp-card pp-card-neutral">
+        <div class="pp-card-header">
+          <div class="pp-card-icon pp-icon-neutral">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <h2 class="pp-card-title">7. Contact</h2>
+        </div>
+        <p class="pp-text">Have questions about this Privacy Policy? Reach out via email:</p>
+        <a href="mailto:karaleutkarsh3696@gmail.com" class="pp-contact-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          karaleutkarsh3696@gmail.com
+        </a>
+      </section>
+
+    </main>
+  </div>
+
+  <WebSticklyDemoScript />
+
+</WebSticklyLayout>
+
+<style>
+  /* ── Hero ─────────────────────────────────────────────────── */
+  .pp-hero {
+    position: relative;
+    padding: 80px 24px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pp-hero-glow {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(34,197,94,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .pp-hero-inner {
+    position: relative;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .pp-shield-wrap {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.25);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 4px;
+  }
+  .pp-shield-icon {
+    width: 36px; height: 36px;
+    color: #4ade80;
+  }
+  .pp-date-badge {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #71717a;
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1px solid #3f3f46;
+    background: rgba(39,39,42,0.6);
+  }
+  .pp-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #f4f4f5;
+    margin: 0;
+    line-height: 1;
+  }
+  .pp-subtitle {
+    font-size: 1.1rem;
+    color: #a1a1aa;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 540px;
+  }
+  .pp-subtitle strong { color: #4ade80; }
+
+  /* ── Zero Data Guarantee ─────────────────────────────────── */
+  .pp-guarantee-wrap {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .pp-guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(34,197,94,0.07);
+    border: 1px solid rgba(34,197,94,0.25);
+    border-radius: 20px;
+    padding: 24px 28px;
+  }
+  .pp-guarantee-icon { font-size: 28px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .pp-guarantee-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #4ade80;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .pp-guarantee-body {
+    font-size: 14px;
+    color: #a1a1aa;
+    line-height: 1.6;
+  }
+  .pp-guarantee-body strong { color: #f4f4f5; }
+
+  /* ── Layout ──────────────────────────────────────────────── */
+  .pp-layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  @media (min-width: 800px) {
+    .pp-layout { grid-template-columns: 220px 1fr; }
+  }
+
+  /* ── TOC ─────────────────────────────────────────────────── */
+  .pp-toc { position: sticky; top: calc(36px + 64px + 24px); }
+  .pp-toc-card {
+    background: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .pp-toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #71717a;
+    margin-bottom: 4px;
+  }
+  .pp-toc-link {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: #a1a1aa;
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 8px;
+    transition: background 0.15s, color 0.15s;
+    line-height: 1.4;
+  }
+  .pp-toc-link:hover { background: rgba(250,204,21,0.08); color: #facc15; }
+  .pp-toc-footer { margin-top: 12px; border-top: 1px solid #3f3f46; padding-top: 12px; }
+  .pp-toc-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #71717a;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .pp-toc-back:hover { color: #facc15; }
+
+  /* ── Sections ────────────────────────────────────────────── */
+  .pp-sections { display: flex; flex-direction: column; gap: 24px; }
+
+  .pp-card {
+    background: #27272a;
+    border-radius: 24px;
+    padding: 28px 32px;
+    border-left: 4px solid transparent;
+    border-top: 1px solid #3f3f46;
+    border-right: 1px solid #3f3f46;
+    border-bottom: 1px solid #3f3f46;
+    scroll-margin-top: calc(36px + 64px + 24px);
+  }
+  .pp-card-yellow { border-left-color: #facc15; }
+  .pp-card-blue   { border-left-color: #60a5fa; }
+  .pp-card-green  { border-left-color: #4ade80; }
+  .pp-card-purple { border-left-color: #a78bfa; }
+  .pp-card-neutral{ border-left-color: #52525b; }
+
+  .pp-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .pp-card-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .pp-icon-yellow  { background: rgba(250,204,21,0.12); color: #facc15; }
+  .pp-icon-blue    { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+  .pp-icon-green   { background: rgba(74,222,128,0.12);  color: #4ade80; }
+  .pp-icon-purple  { background: rgba(167,139,250,0.12); color: #a78bfa; }
+  .pp-icon-neutral { background: rgba(82,82,91,0.3);     color: #a1a1aa; }
+
+  .pp-card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #f4f4f5;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .pp-text {
+    font-size: 15px;
+    color: #a1a1aa;
+    line-height: 1.7;
+    margin: 0 0 14px;
+  }
+  .pp-text:last-child { margin-bottom: 0; }
+  .pp-text strong { color: #f4f4f5; }
+  .pp-text-sm { font-size: 13px; color: #71717a; margin-top: 14px; }
+  .pp-highlight { color: #4ade80 !important; }
+
+  .pp-none-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(250,204,21,0.06);
+    border: 1px solid rgba(250,204,21,0.2);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #facc15;
+    margin: 14px 0;
+  }
+  .pp-none-icon { font-size: 20px; font-weight: 900; }
+
+  .pp-code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 12px;
+    background: #18181b;
+    color: #facc15;
+    border: 1px solid #3f3f46;
+    border-radius: 5px;
+    padding: 2px 7px;
+  }
+  .pp-code-lg { font-size: 13px; padding: 4px 10px; }
+
+  .pp-kbd {
+    font-family: monospace;
+    font-size: 11px;
+    background: #18181b;
+    border: 1px solid #52525b;
+    border-radius: 5px;
+    padding: 2px 7px;
+    color: #d4d4d8;
+    box-shadow: 0 2px 0 #3f3f46;
+  }
+
+  .pp-list {
+    list-style: none;
+    padding: 0;
+    margin: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pp-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #a1a1aa;
+    line-height: 1.55;
+  }
+  .pp-list li strong { color: #f4f4f5; }
+  .pp-list-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .pp-dot-blue    { background: #60a5fa; }
+  .pp-dot-neutral { background: #52525b; }
+
+  /* AES algo box */
+  .pp-algo-box {
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin: 16px 0;
+  }
+  .pp-algo-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #71717a;
+    margin-bottom: 6px;
+  }
+  .pp-algo-value {
+    font-size: 22px;
+    font-weight: 900;
+    color: #4ade80;
+    letter-spacing: -0.02em;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .pp-algo-note {
+    font-size: 12px;
+    color: #71717a;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* Permissions */
+  .pp-perms { display: flex; flex-direction: column; gap: 16px; margin-top: 14px; }
+  .pp-perm {
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .pp-perm-desc {
+    font-size: 13px;
+    color: #a1a1aa;
+    line-height: 1.6;
+    margin: 8px 0 0;
+  }
+
+  /* Contact */
+  .pp-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f4f4f5;
+    text-decoration: none;
+    background: #18181b;
+    border: 1px solid #3f3f46;
+    border-radius: 12px;
+    padding: 12px 20px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pp-contact-btn:hover { border-color: #facc15; color: #facc15; }
+
+  @media (prefers-color-scheme: light) {
+    .pp-date-badge {
+      color: #52525b;
+      border: 1px solid #e4e4e7;
+      background: rgba(244, 244, 245, 0.8);
+    }
+    .pp-shield-wrap { background: rgba(34,197,94,0.05); border-color: rgba(34,197,94,0.2); }
+    .pp-title { color: #18181b; }
+    .pp-subtitle { color: #52525b; }
+    .pp-guarantee { background: rgba(34,197,94,0.04); border-color: rgba(34,197,94,0.2); }
+    .pp-guarantee-body { color: #52525b; }
+    .pp-guarantee-body strong { color: #18181b; }
+    .pp-toc-card { background: #fff; border-color: #e4e4e7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .pp-toc-title { color: #71717a; }
+    .pp-toc-link { color: #52525b; }
+    .pp-toc-link:hover { background: rgba(250,204,21,0.1); color: #ca8a04; }
+    .pp-toc-footer { border-color: #e4e4e7; }
+    .pp-toc-back { color: #71717a; }
+    .pp-toc-back:hover { color: #ca8a04; }
+    .pp-card { background: #fff; border-color: #e4e4e7; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .pp-card-title { color: #18181b; }
+    .pp-text { color: #52525b; }
+    .pp-text strong { color: #18181b; }
+    .pp-text-sm { color: #71717a; }
+    .pp-none-box { background: rgba(250,204,21,0.05); border-color: rgba(250,204,21,0.2); color: #ca8a04; }
+    .pp-code { background: #f4f4f5; border-color: #e4e4e7; color: #ca8a04; }
+    .pp-kbd { background: #f4f4f5; border-color: #d4d4d8; color: #52525b; box-shadow: 0 2px 0 #e4e4e7; }
+    .pp-algo-box { background: #fff; border-color: #e4e4e7; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); }
+    .pp-algo-label { color: #71717a; }
+    .pp-algo-note { color: #71717a; }
+    .pp-algo-value { color: #16a34a; }
+    .pp-perm { background: #fff; border-color: #e4e4e7; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); }
+    .pp-perm-desc { color: #52525b; }
+    .pp-contact-btn { background: #fff; border-color: #e4e4e7; color: #18181b; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); }
+    .pp-list li { color: #52525b; }
+    .pp-list li strong { color: #18181b; }
+    .pp-icon-neutral { background: rgba(82,82,91,0.08); color: #52525b; }
+  }
+</style>
