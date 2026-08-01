@@ -454,12 +454,6 @@
   }
 
   function setupShortcuts() {
-    const heroBtn = document.getElementById('hero-install-btn');
-
-    heroBtn?.addEventListener('click', () => {
-      alert("WebStickly v1.0.0 has been submitted and is currently under review on the Chrome Web Store! Check back soon.");
-    });
-
     window.addEventListener('keydown', (e) => {
       if (e.altKey && (e.key === 'n' || e.key === 'N')) {
         e.preventDefault();
