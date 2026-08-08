@@ -30,7 +30,7 @@ const currentYear = new Date().getFullYear();
     <div class="ws-launch-bar">
       <span class="ws-launch-confetti" aria-hidden="true">🎉</span>
       <span class="ws-launch-text">
-        <strong>WebStickly 1.0.0</strong> is now live! &nbsp;·&nbsp; Available on Chrome Web Store
+        <strong>WebStickly 2.0.0</strong> is now live! &nbsp;·&nbsp; Available on Chrome Web Store
       </span>
       <a href="https://chromewebstore.google.com/detail/webstickly/eakcpfpnomihnblennikolojepcdkghm" target="_blank" rel="noopener noreferrer" class="ws-launch-badge hover:bg-yellow-500/20 transition-colors">Get it now</a>
       <span class="ws-launch-confetti" aria-hidden="true">🎉</span>
@@ -46,7 +46,7 @@ const currentYear = new Date().getFullYear();
         <a href="/webstickly" class="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2 shrink-0">
           <span class="bg-gradient-to-br from-[#facc15] to-[#fb923c] text-black px-2 py-0.5 rounded shadow-sm text-sm transform -rotate-2">WS</span>
           WebStickly
-          <span class="ws-version-chip">v1.0.0</span>
+          <span class="ws-version-chip">v2.0.0</span>
         </a>
         <!-- Nav links -->
         <nav class="flex items-center gap-5">
@@ -84,131 +84,6 @@ const currentYear = new Date().getFullYear();
         </div>
       </div>
     </footer>
-
-    <!-- Celebrate Button -->
-    <button id="ws-celebrate-btn" class="fixed bottom-6 right-6 z-[60] bg-gradient-to-r from-[#facc15] to-[#fb923c] text-black w-14 h-14 rounded-full flex items-center justify-center text-2xl hover:scale-110 active:scale-95 transition-all duration-300" title="Celebrate! 🎉" style="box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); border: 2px solid rgba(255,255,255,0.2);">
-      🎉
-    </button>
-
-    <!-- Confetti & Sound Script for Celebration -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script>
-      function playBangSound() {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const audioCtx = new AudioContext();
-        const bufferSize = audioCtx.sampleRate * 0.3; 
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          data[i] = Math.random() * 2 - 1;
-        }
-        const noiseSource = audioCtx.createBufferSource();
-        noiseSource.buffer = buffer;
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(1000, audioCtx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.2);
-        const gainNode = audioCtx.createGain();
-        gainNode.gain.setValueAtTime(1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-        noiseSource.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        noiseSource.start();
-      }
-
-      function triggerMassiveBoom() {
-        const count = 300;
-        
-        let customShapes = ['square'];
-        if (typeof confetti.shapeFromText === 'function') {
-          const stickyNote = confetti.shapeFromText({ text: '📝', scalar: 3.5 });
-          const pin = confetti.shapeFromText({ text: '📌', scalar: 3.5 });
-          customShapes = ['square', stickyNote, pin];
-        }
-
-        const defaults = { 
-          zIndex: 100, 
-          colors: ['#facc15', '#fb923c', '#34d399', '#60a5fa', '#ffffff'],
-          shapes: customShapes
-        };
-
-        function fire(particleRatio, opts) {
-          confetti(Object.assign({}, defaults, opts, {
-            particleCount: Math.floor(count * particleRatio)
-          }));
-        }
-
-        // Fire from multiple points across the screen for full width boom
-        const origins = [0.15, 0.5, 0.85]; 
-        origins.forEach(x => {
-          fire(0.25, { spread: 60, startVelocity: 65, origin: { x, y: 0.8 }, scalar: 1.2 });
-          fire(0.2, { spread: 100, origin: { x, y: 0.8 }, scalar: 1.2 });
-          fire(0.35, { spread: 120, decay: 0.91, origin: { x, y: 0.8 }, scalar: 1.0 });
-          fire(0.1, { spread: 140, startVelocity: 35, decay: 0.92, origin: { x, y: 0.8 }, scalar: 1.4 });
-          fire(0.1, { spread: 140, startVelocity: 55, origin: { x, y: 0.8 }, scalar: 1.2 });
-        });
-      }
-
-      let isCelebrating = false;
-      function celebrate(times = 10) {
-        if (isCelebrating) return;
-        isCelebrating = true;
-        
-        const celebrateBtn = document.getElementById('ws-celebrate-btn');
-        if (celebrateBtn) {
-          celebrateBtn.style.opacity = '0.5';
-          celebrateBtn.style.cursor = 'not-allowed';
-        }
-
-        setTimeout(() => {
-          isCelebrating = false;
-          if (celebrateBtn) {
-            celebrateBtn.style.opacity = '1';
-            celebrateBtn.style.cursor = 'pointer';
-          }
-        }, 5000);
-
-        let count = 0;
-        playBangSound();
-        triggerMassiveBoom();
-        count++;
-        if (count >= times) return;
-        
-        const interval = setInterval(() => {
-          playBangSound();
-          triggerMassiveBoom();
-          count++;
-          if (count >= times) {
-            clearInterval(interval);
-          }
-        }, 600);
-      }
-
-      window.addEventListener('load', () => {
-        // Fire confetti on load immediately (sound might be blocked by browser)
-        celebrate(10);
-      });
-
-      const celebrateBtn = document.getElementById('ws-celebrate-btn');
-      if (celebrateBtn) {
-        celebrateBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          celebrate(10);
-        });
-      }
-      
-      // Make the topbar confetti icons clickable too!
-      document.querySelectorAll('.ws-launch-confetti').forEach(icon => {
-        icon.style.cursor = 'pointer';
-        icon.title = 'Celebrate! 🎉';
-        icon.addEventListener('click', (e) => {
-          e.preventDefault();
-          celebrate(10);
-        });
-      });
-    </script>
   </body>
 </html>
 
