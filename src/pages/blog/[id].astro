@@ -74,4 +74,30 @@ const readingTime = Math.ceil((post.body?.split(' ').length || 200) / 200) + ' m
   </article>
   
   <Footer />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre').forEach((block) => {
+        block.classList.add('relative', 'group');
+        
+        const button = document.createElement('button');
+        button.className = 'absolute top-2 right-2 px-2 py-1 bg-gray-800 text-gray-300 rounded hover:bg-gray-700 hover:text-white transition-colors text-xs font-medium opacity-0 group-hover:opacity-100 z-10';
+        button.innerHTML = 'Copy';
+        
+        block.appendChild(button);
+
+        button.addEventListener('click', async () => {
+          const code = block.querySelector('code')?.innerText || block.innerText;
+          // Remove the 'Copy' text if it was included in innerText
+          const textToCopy = code.endsWith('Copy') ? code.slice(0, -4).trimEnd() : code;
+          
+          await navigator.clipboard.writeText(textToCopy);
+          button.innerHTML = 'Copied!';
+          setTimeout(() => {
+            button.innerHTML = 'Copy';
+          }, 2000);
+        });
+      });
+    });
+  </script>
 </BaseLayout>

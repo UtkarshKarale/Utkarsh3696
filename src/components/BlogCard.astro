@@ -23,9 +23,20 @@ const generateGradient = (id: string) => {
   return `linear-gradient(135deg, hsl(${hue1}, 80%, 65%), hsl(${hue2}, 80%, 55%))`;
 };
 const bgStyle = post.data.coverImage ? `background-image: url('${post.data.coverImage}')` : `background: ${generateGradient(post.id)}`;
+
+// Check if post is new (less than 14 days old)
+const postDate = new Date(post.data.publishedAt);
+const today = new Date();
+const isNew = (today.getTime() - postDate.getTime()) / (1000 * 3600 * 24) <= 14;
 ---
 
 <a href={`/blog/${post.id}`} class="spotlight-card group flex flex-col h-[22rem] p-6 rounded-[2rem] border border-gray-100/20 transition-all duration-500 relative overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:shadow-gray-300/50 dark:hover:shadow-black/60">
+  
+  {isNew && (
+    <div class="absolute top-4 right-4 z-20 bg-blue-500 text-white text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider shadow-lg shadow-blue-500/50">
+      New
+    </div>
+  )}
   
   <!-- Full Background Image/Gradient -->
   <div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-110 z-0" style={bgStyle}></div>
