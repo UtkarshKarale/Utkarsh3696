@@ -56,11 +56,30 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Scrolling tab title -->
+    <script>
+      (function () {
+        const base = document.title || 'Utkarsh Karale';
+        const msg = '  🇮🇳 Happy Independence Day!  •  ' + base + '  ';
+        let pos = 0;
+        setInterval(() => {
+          document.title = msg.slice(pos) + msg.slice(0, pos);
+          pos = (pos + 1) % msg.length;
+        }, 180);
+      })();
+    </script>
+
+    <style>
+      /* Tricolor scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #fff; }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, #FF9933 0% 33%, #fff 33% 66%, #138808 66% 100%);
+        border-radius: 999px;
+      }
+      * { scrollbar-width: thin; scrollbar-color: #FF9933 #f0f0f0; }
+    </style>
   </head>
   <body class="bg-white text-gray-900 font-sans antialiased min-h-screen flex flex-col relative">
     <!-- Minimal Light Background Effect (Dot Pattern) -->
