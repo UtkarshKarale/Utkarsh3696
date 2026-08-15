@@ -1,6 +1,6 @@
 ---
 title: "Launching WebStickly: Domains, Automations, and Reaching 1,000 Users"
-description: "My journey purchasing webstickly.live, setting up n8n workflows, overcoming email spam issues with Brevo, and planning my next steps."
+description: "My journey purchasing webstickly.online, setting up n8n workflows, overcoming email spam issues with Brevo, and planning my next steps."
 publishedAt: "2026-08-15"
 coverImage: "/og-image.png"
 tags: ["WebStickly", "SaaS", "n8n", "Automation"]
@@ -8,7 +8,7 @@ tags: ["WebStickly", "SaaS", "n8n", "Automation"]
 
 The journey with WebStickly has officially taken a major step forward! On **August 15th**, I officially purchased the domain through GoDaddy and set everything up. 
 
-You can now visit the official site here: **[www.webstickly.live](https://www.webstickly.live)**
+You can now visit the official site here: **[www.webstickly.online](https://www.webstickly.online)**
 
 My primary goal right now? **To reach 1,000 active users on WebStickly.** I've planned out the roadmap, and I'm putting all the pieces in place to make it happen. Here is a look at what I've been working on behind the scenes.
 
