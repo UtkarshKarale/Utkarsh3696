@@ -11,7 +11,7 @@ Here’s how I found the root cause and fixed it.
 
 ---
 
-### 🧩 The Problem
+### The Problem
 
 In my project, I send a “Retry” or “Approval” link to users through Google Chat using a webhook.
 The idea is simple — users click the link to perform an action (like retrying a failed job or approving a request).
@@ -20,20 +20,20 @@ But strangely, the links were getting triggered 5–6 times automatically, even 
 
 ---
 
-### 🔍 Debugging Journey
+### Debugging Journey
 
 I checked:
-- My retry logic — ✅ fine
-- Webhook code — ✅ fine
-- Network logs — ✅ fine
-- Server retries — ✅ none
+- My retry logic — verified fine
+- Webhook code — verified fine
+- Network logs — verified fine
+- Server retries — none
 
 Still, every time I sent the message, the link was hit multiple times.
 That’s when I realized — something else was calling the URL before the user.
 
 ---
 
-### 💡 The Discovery
+### The Discovery
 
 While checking server logs, I noticed the `User-Agent` header looked like this:
 
@@ -47,7 +47,7 @@ So technically, it wasn’t the user clicking the link. It was Google Chat doing
 
 ---
 
-### 🛠️ The Fix
+### The Fix
 
 Simple but effective — I just added a condition to ignore requests from Google Chat’s user agent.
 
@@ -65,14 +65,14 @@ With that small change, everything worked perfectly — no more auto retries or 
 
 ---
 
-### 🎯 The Takeaway
+### The Takeaway
 
 Sometimes the smallest things, like link previews, can cause the biggest confusion.
 Always check the `User-Agent` when debugging unexpected API calls — it might not be your code at all!
 
 ---
 
-### 💬 Closing Thought
+### Closing Thought
 
 Debugging isn’t just about fixing errors — it’s about understanding why something behaves unexpectedly.
-And sometimes, the culprit is a helpful feature that’s too helpful 😄
+And sometimes, the culprit is a helpful feature that’s too helpful.

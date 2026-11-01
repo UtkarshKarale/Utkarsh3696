@@ -270,14 +270,14 @@
       el.innerHTML = `
         <div class="ws-note-header" title="Drag to move">
           <div class="ws-note-left">
-            <span class="ws-note-icon">📌</span>
+            <span class="ws-note-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="17" y2="22"/><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"/></svg></span>
             ${avatarHtml}
             ${!window.location.pathname.includes('/webstickly') ? '<a href="/webstickly" style="font-size:10px; font-weight:700; color:rgba(0,0,0,0.5); text-decoration:none; margin-left:6px; background:rgba(0,0,0,0.06); padding:2px 6px; border-radius:4px; pointer-events:all;" target="_blank">Get WebStickly</a>' : ''}
           </div>
           <div class="ws-note-actions">
-            <button class="ws-btn ws-btn-copy" title="Copy text">📋</button>
+            <button class="ws-btn ws-btn-copy" title="Copy text"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
             <button class="ws-btn ws-btn-minimize" title="${minimized ? 'Expand' : 'Minimize'}">${minimized ? '+' : '−'}</button>
-            <button class="ws-btn ws-btn-delete" title="Delete note">✕</button>
+            <button class="ws-btn ws-btn-delete" title="Delete note"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg></button>
           </div>
         </div>
         <div class="ws-note-body">
@@ -329,9 +329,9 @@
         e.stopPropagation();
         const text = textarea?.value || note.text || '';
         navigator.clipboard.writeText(text).then(() => {
-          const origText = copyBtn.textContent;
-          copyBtn.textContent = '✓';
-          setTimeout(() => { copyBtn.textContent = origText; }, 1200);
+          const origHtml = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+          setTimeout(() => { copyBtn.innerHTML = origHtml; }, 1200);
         });
       });
 
@@ -419,13 +419,13 @@
     // Customize notes based on page
     if (window.location.pathname.endsWith('/webstickly') || window.location.pathname.endsWith('/webstickly/')) {
       initialNotes = [
-        { id: 'ws-demo-1', metadata: { color: 'yellow' }, author: { name: 'Utkarsh', initials: 'UK', color: '#10b981' }, text: '📌 Welcome to WebStickly 1.0.0!\nDrag this note anywhere on the screen. It will remember its position.', x: w > 800 ? 50 : 20, y: 120 },
-        { id: 'ws-demo-2', metadata: { color: 'blue' }, author: { name: 'Reviewer', initials: 'CR', color: '#3b82f6' }, text: '⚡ AES-GCM 256-bit encrypted backup tested. Local storage logic working perfectly.', x: w > 800 ? w - 300 : 20, y: 350 },
-        { id: 'ws-demo-3', metadata: { color: 'pink' }, author: { name: 'WebStickly', initials: 'WS', color: '#ec4899' }, text: '💡 Try pressing Alt + N anywhere on the page to trigger the shortcut notification!', x: w > 800 ? w / 2 - 120 : 20, y: window.innerHeight > 800 ? window.innerHeight - 250 : 600 }
+        { id: 'ws-demo-1', metadata: { color: 'yellow' }, author: { name: 'Utkarsh', initials: 'UK', color: '#10b981' }, text: 'Welcome to WebStickly 2.0.0!\nDrag this note anywhere on the screen. It will remember its position.', x: w > 800 ? 50 : 20, y: 120 },
+        { id: 'ws-demo-2', metadata: { color: 'blue' }, author: { name: 'Reviewer', initials: 'CR', color: '#3b82f6' }, text: 'AES-GCM 256-bit encrypted backup tested. Local storage logic working perfectly.', x: w > 800 ? w - 300 : 20, y: 350 },
+        { id: 'ws-demo-3', metadata: { color: 'pink' }, author: { name: 'WebStickly', initials: 'WS', color: '#ec4899' }, text: 'Try pressing Alt + N anywhere on the page to trigger the shortcut notification!', x: w > 800 ? w / 2 - 120 : 20, y: window.innerHeight > 800 ? window.innerHeight - 250 : 600 }
       ];
     } else if (window.location.pathname.includes('/privacy')) {
       initialNotes = [
-        { id: 'ws-privacy-1', metadata: { color: 'green' }, author: { name: 'Privacy', initials: 'P', color: '#4ade80' }, text: '🔒 Fun Fact: This note (and any note you create) is stored entirely in your browser\'s local storage.\n\nWe couldn\'t read it even if we wanted to!', x: w > 800 ? w - 320 : 20, y: 220 },
+        { id: 'ws-privacy-1', metadata: { color: 'green' }, author: { name: 'Privacy', initials: 'P', color: '#4ade80' }, text: 'Fun Fact: This note (and any note you create) is stored entirely in your browser\'s local storage.\n\nWe couldn\'t read it even if we wanted to!', x: w > 800 ? w - 320 : 20, y: 220 },
         { id: 'ws-privacy-2', metadata: { color: 'purple' }, author: { name: 'Local', initials: 'L', color: '#a78bfa' }, text: 'No databases.\nNo telemetry.\nNo tracking.\n\nTry pressing Alt + N to make your own completely private note right now.', x: w > 800 ? 50 : 20, y: 450 }
       ];
     } else {

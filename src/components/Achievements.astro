@@ -1,71 +1,161 @@
 ---
 const achievements = [
   {
+    title: "AI Excellence Award – Vision to Execution",
+    organization: "TwoDots Software Services",
+    description: "Awarded to Utkarsh for exceptional achievement in designing and delivering an end-to-end project powered by AI, including seamless integration of an AI chatbot. Recognized for dedication, speed, and innovative execution.",
+    image: "/awards/ai-excellence-award.webp",
+    link: "https://www.linkedin.com/posts/utkarshkarale_appreciation-award-activity-7336591327008067584-apst",
+    credentialId: "",
+    isOriginal: true
+  },
+  {
+    title: "AI-Driven Cyber Security & Blockchain Technologies",
+    organization: "Walchand College of Engineering & NCSRC",
+    description: "Successfully completed One Week ISTE-approved Faculty Development Program on 'AI-Driven Cyber Security and Blockchain Technologies: Building Secure Intelligent Digital Ecosystems' organized in collaboration with National Cyber Security Research Council (NCSRC), New Delhi.",
+    image: "/awards/walchand-cybersecurity-cert.webp",
+    link: "",
+    credentialId: "WCE/CSE/ISTEFDP1_26/P/136",
+    isOriginal: true
+  },
+  {
     title: "Spotlight Award",
     organization: "TwoDots Software Solution",
     description: "Awarded for innovative work in AI automation, leading the creation of impactful tools like Clipman and Status AI. Recognized for creativity, ownership, and a forward-thinking mindset.",
-    image: "https://media.licdn.com/dms/image/v2/D4D22AQGjY4CRfCc0Uw/feedshare-shrink_800/B4DZoQuwHdG8Ag-/0/1761217283618?e=1783555200&v=beta&t=0G4oTtzP6FikaT_zQyPhFRHVPesq-197ICe8H6SOW9Q",
-    link: ""
-  },
-  {
-    title: "AI Excellence Award – Vision to Execution",
-    organization: "TwoDots Software Solution",
-    description: "Honoured to receive the AI Excellence Award from Mayur Patil. Grateful for the recognition of my vision-to-execution approach and dedication to excellence in AI.",
     image: "",
-    link: "https://www.linkedin.com/posts/utkarshkarale_appreciation-award-activity-7336591327008067584-apst?utm_source=share&utm_medium=member_desktop&rcm=ACoAADc5_yoBWQoxh9czRRwd2tOVLHPO-pEtIR8"
+    link: "",
+    credentialId: "",
+    isOriginal: false
   },
   {
     title: "Young Turks Merit Certificate",
     organization: "Naukri Campus",
-    description: "Achievement unlocked! Proud to receive this recognition, which fuels my passion for continuous growth and innovation in my career.",
-    image: "https://media.licdn.com/dms/image/v2/D5622AQEdi04nWG39cQ/feedshare-shrink_800/feedshare-shrink_800/0/1729332694015?e=1783555200&v=beta&t=pFBEt8EGuNgMVF3Hxl4tQ6GWiBvhf62phlkMryG4i9I",
-    link: ""
+    description: "Achievement unlocked! Recognized by Naukri Campus Young Turks for outstanding aptitude, technical potential, and problem-solving excellence.",
+    image: "",
+    link: "",
+    credentialId: "",
+    isOriginal: false
   },
   {
     title: "Star Coder of the Week",
     organization: "Qspiders",
-    description: "Celebrating my Star Coder of the Week award! Proud to be part of a community that fosters growth and innovation. My love for coding only gets stronger every day!",
-    image: "https://media.licdn.com/dms/image/v2/D5622AQFvF9OmLchDtg/feedshare-shrink_800/feedshare-shrink_800/0/1721373480329?e=1783555200&v=beta&t=04cuyMngSAsqWqk6DJ1GvmTx71V3dSm_kwBRCxzROjM",
-    link: ""
+    description: "Awarded Star Coder of the Week in recognition of superior algorithmic problem solving, clean code standards, and rapid learning ability.",
+    image: "",
+    link: "",
+    credentialId: "",
+    isOriginal: false
   },
   {
     title: "3rd Prize - Project Competition",
     organization: "AMGOI Vathar, Kolhapur (REFLEX Event)",
-    description: "Secured the 3rd Prize in the college-level Project Competition at the REFLEX event held at Ashokrao Mane Group of Institutions (AMGOI), Vathar, Kolhapur.",
+    description: "Secured the 3rd Prize in the college-level Project Competition at the REFLEX annual technical event held at Ashokrao Mane Group of Institutions (AMGOI), Vathar, Kolhapur.",
     image: "",
-    link: ""
+    link: "",
+    credentialId: "",
+    isOriginal: false
   }
 ];
 ---
 
 <section id="achievements" class="py-20 border-t border-gray-100">
   <div class="max-w-4xl mx-auto px-6">
-    <h2 class="text-2xl font-bold text-gray-900 mb-8">Achievements & Awards</h2>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900">Achievements & Awards</h2>
+        <p class="text-sm text-gray-500 mt-1">Recognitions, honors, and competition milestones.</p>
+      </div>
+      <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        Original Certificates Verified
+      </span>
+    </div>
     
     <div class="grid md:grid-cols-2 gap-8">
       {achievements.map(achievement => (
         <div class="group flex flex-col bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 hover:-translate-y-1">
           {achievement.image ? (
-            <div class="h-48 w-full overflow-hidden bg-gray-50 border-b border-gray-100 relative">
-              <img src={achievement.image} alt={achievement.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="h-56 w-full overflow-hidden bg-slate-50 border-b border-gray-100 relative group/img flex items-center justify-center p-1">
+              <img 
+                src={achievement.image} 
+                alt={achievement.title} 
+                class="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500" 
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-0.5 rounded-md bg-white/95 text-emerald-800 shadow-sm border border-emerald-200 backdrop-blur-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Original Certificate
+              </span>
+              <div class="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+                <a 
+                  href={achievement.image} 
+                  download 
+                  class="inline-flex items-center gap-1.5 bg-white text-gray-900 px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-lg hover:bg-gray-100 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span>Download</span>
+                </a>
+                <a 
+                  href={achievement.image} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-1.5 bg-black/80 text-white px-3.5 py-1.5 rounded-lg text-xs font-bold shadow-lg hover:bg-black transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                  <span>Full View</span>
+                </a>
+              </div>
             </div>
           ) : (
-            <div class="h-48 w-full bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center p-6 text-center border-b border-gray-900 relative overflow-hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/10 absolute -right-4 -bottom-4 w-40 h-40 transform -rotate-12"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-              <h3 class="text-2xl font-bold text-white relative z-10 drop-shadow-md">{achievement.title}</h3>
+            <div class="h-44 w-full bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 flex flex-col items-center justify-center p-6 text-center border-b border-gray-100 relative overflow-hidden">
+              <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-2.5 backdrop-blur-sm border border-white/10 text-amber-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+              </div>
+              <span class="text-xs font-medium tracking-wide text-indigo-200 uppercase">{achievement.organization}</span>
+              <h3 class="text-lg font-bold text-white mt-1 drop-shadow-sm px-4">{achievement.title}</h3>
+              <span class="absolute top-3 right-3 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-white/10 text-white/80 border border-white/15">
+                Milestone
+              </span>
             </div>
           )}
+          
           <div class="p-6 flex flex-col flex-grow">
             <h3 class="text-xl font-bold text-gray-900 mb-1">{achievement.title}</h3>
-            <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-4">{achievement.organization}</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-600 mb-2">{achievement.organization}</p>
+            {achievement.credentialId && (
+              <p class="text-[11px] font-mono text-gray-400 mb-3 bg-gray-50 px-2 py-1 rounded inline-block w-fit">
+                ID: {achievement.credentialId}
+              </p>
+            )}
             <p class="text-gray-600 text-sm leading-relaxed mb-6">{achievement.description}</p>
             
-            {achievement.link && (
-              <a href={achievement.link} target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center text-sm font-bold text-gray-900 hover:text-blue-600 transition-colors">
-                View Post 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-              </a>
-            )}
+            <div class="mt-auto pt-4 border-t border-gray-100 flex items-center justify-between gap-3">
+              {achievement.image ? (
+                <a 
+                  href={achievement.image} 
+                  download 
+                  class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download Certificate
+                </a>
+              ) : (
+                <span class="inline-flex items-center gap-1 text-xs text-gray-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                  Verified Honor
+                </span>
+              )}
+              {achievement.link && (
+                <a 
+                  href={achievement.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center text-xs font-bold text-blue-600 hover:text-blue-800 transition-colors"
+                >
+                  View Post 
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </a>
+              )}
+            </div>
           </div>
         </div>
       ))}

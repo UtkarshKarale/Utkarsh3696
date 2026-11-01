@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
@@ -11,28 +10,326 @@ const sortedProjects = allProjects.sort((a, b) => {
   if (!a.data.featured && b.data.featured) return 1;
   return new Date(b.data.publishedAt || 0).valueOf() - new Date(a.data.publishedAt || 0).valueOf();
 });
+
+// App icon and category helper with Lucide SVG paths
+const getAppDetails = (id: string, title: string) => {
+  switch (id) {
+    case 'cleanupload':
+      return { 
+        iconSvg: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>', 
+        category: 'Privacy & Security', 
+        gradient: 'from-emerald-500 via-teal-600 to-cyan-700', 
+        badge: 'Featured' 
+      };
+    case 'monitoro':
+      return { 
+        iconSvg: '<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/>', 
+        category: 'Monitoring & Bots', 
+        gradient: 'from-blue-600 via-indigo-600 to-sky-700', 
+        badge: 'Utility' 
+      };
+    case 'bitqr':
+      return { 
+        iconSvg: '<rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>', 
+        category: 'Utilities & QR', 
+        gradient: 'from-indigo-600 via-purple-600 to-pink-600', 
+        badge: 'Productivity' 
+      };
+    case 'cartext-ai':
+      return { 
+        iconSvg: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>', 
+        category: 'AI & Automation', 
+        gradient: 'from-cyan-600 via-blue-700 to-slate-900', 
+        badge: 'AI Tool' 
+      };
+    case 'shuddhainbox':
+      return { 
+        iconSvg: '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>', 
+        category: 'Productivity & Email', 
+        gradient: 'from-violet-600 via-purple-600 to-fuchsia-700', 
+        badge: 'Web App' 
+      };
+    case 'finance-flow':
+      return { 
+        iconSvg: '<rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/>', 
+        category: 'Finance & Tools', 
+        gradient: 'from-rose-500 via-orange-500 to-amber-600', 
+        badge: 'Finance' 
+      };
+    case 'facial-expression-detection':
+      return { 
+        iconSvg: '<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/>', 
+        category: 'Machine Learning', 
+        gradient: 'from-amber-500 via-lime-600 to-emerald-700', 
+        badge: 'AI/ML' 
+      };
+    case 'era-voice-assistant':
+      return { 
+        iconSvg: '<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/>', 
+        category: 'Voice & AI', 
+        gradient: 'from-sky-500 via-blue-600 to-indigo-700', 
+        badge: 'Assistant' 
+      };
+    case 'contact-manager':
+      return { 
+        iconSvg: '<path d="M16 2v2"/><path d="M7 22v-2a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><rect width="18" height="18" x="3" y="4" rx="2"/><circle cx="12" cy="10" r="3"/>', 
+        category: 'Productivity', 
+        gradient: 'from-blue-500 via-slate-600 to-gray-800', 
+        badge: 'Utility' 
+      };
+    case 'weather-app':
+      return { 
+        iconSvg: '<path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/>', 
+        category: 'Weather & API', 
+        gradient: 'from-amber-400 via-sky-500 to-blue-600', 
+        badge: 'Web App' 
+      };
+    case 'cricket-game':
+      return { 
+        iconSvg: '<line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/>', 
+        category: 'Games & CLI', 
+        gradient: 'from-emerald-600 via-green-700 to-teal-800', 
+        badge: 'CLI Game' 
+      };
+    case 'guess-the-number':
+      return { 
+        iconSvg: '<rect width="12" height="12" x="2" y="10" rx="2" ry="2"/><path d="m17.92 14 3.5-3.5a2.24 2.24 0 0 0 0-3.16l-4.76-4.76a2.24 2.24 0 0 0-3.16 0L10 6.08"/><circle cx="8" cy="16" r="1"/><circle cx="16" cy="6" r="1"/>', 
+        category: 'Games & CLI', 
+        gradient: 'from-purple-600 via-indigo-700 to-slate-800', 
+        badge: 'CLI Game' 
+      };
+    default:
+      return { 
+        iconSvg: '<path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/>', 
+        category: 'App', 
+        gradient: 'from-gray-700 via-gray-800 to-gray-900', 
+        badge: 'Tool' 
+      };
+  }
+};
 ---
 
 <BaseLayout 
-  title="Utkarsh Develops | Projects by Utkarsh Karale"
-  description="Explore the portfolio of Utkarsh Karale, featuring robust web applications, AI tools, and full-stack projects like Monitoro, SuddhaInbox, and Cartext AI."
+  title="My Store | Utkarsh Karale's App Store"
+  description="Discover and try web applications, AI tools, and developer utilities built by Utkarsh Karale in his free time."
 >
   <Header />
   
-  <div class="pt-32 pb-20 max-w-4xl mx-auto px-6">
-    <div class="mb-12">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">Utkarsh Develops</h1>
-      <p class="text-lg text-gray-600 max-w-2xl">
-        Things Utkarsh builds when he has free time in life.
-      </p>
+  <div class="pt-24 pb-20 max-w-5xl mx-auto px-6">
+    <!-- Store Header -->
+    <div class="mb-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-blue-700 text-xs font-bold uppercase tracking-wider mb-4 shadow-2xs">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><rect width="20" height="5" x="2" y="7" rx="1"/></svg>
+        <span>Utkarsh's App Store</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+        <span>Directory</span>
+      </div>
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 class="text-4xl sm:text-5xl font-black text-gray-900 tracking-tight leading-tight mb-3">
+            My Store
+          </h1>
+          <p class="text-base sm:text-lg text-gray-600 max-w-2xl font-medium leading-relaxed">
+            Things Utkarsh builds when he has free time in life. Explore, launch, or inspect applications, privacy tools, and AI utilities.
+          </p>
+        </div>
+
+        <!-- Store Meta Stats -->
+        <div class="flex items-center gap-4 text-xs font-semibold text-gray-500 bg-gray-50 border border-gray-200/80 px-4 py-2.5 rounded-2xl flex-shrink-0">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="text-gray-900 font-bold">{sortedProjects.length}</span> Apps
+          </div>
+          <span class="text-gray-300">|</span>
+          <div class="text-emerald-700 font-bold">100% Free</div>
+          <span class="text-gray-300">|</span>
+          <div>Instant Launch</div>
+        </div>
+      </div>
     </div>
-    
-    <div class="grid md:grid-cols-2 gap-6">
-      {sortedProjects.map(project => (
-        <ProjectCard project={project} />
-      ))}
+
+    <!-- Category Filter Tabs -->
+    <div class="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-gray-100">
+      <button 
+        class="store-filter-btn px-4 py-2 rounded-full text-xs font-bold transition-all bg-black text-white shadow-sm"
+        data-filter="all"
+      >
+        All Apps ({sortedProjects.length})
+      </button>
+      <button 
+        class="store-filter-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-gray-600 hover:text-black hover:bg-gray-100 transition-all border border-gray-200"
+        data-filter="featured"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Featured
+      </button>
+      <button 
+        class="store-filter-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-gray-600 hover:text-black hover:bg-gray-100 transition-all border border-gray-200"
+        data-filter="ai"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+        AI & Automation
+      </button>
+      <button 
+        class="store-filter-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-gray-600 hover:text-black hover:bg-gray-100 transition-all border border-gray-200"
+        data-filter="privacy"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Privacy & Tools
+      </button>
+      <button 
+        class="store-filter-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold text-gray-600 hover:text-black hover:bg-gray-100 transition-all border border-gray-200"
+        data-filter="web"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Web Apps
+      </button>
+    </div>
+
+    <!-- App Store Grid Listings -->
+    <div id="store-apps-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedProjects.map(project => {
+        const details = getAppDetails(project.id, project.data.title);
+        const isFeatured = project.data.featured;
+        const isAI = details.category.toLowerCase().includes('ai') || details.category.toLowerCase().includes('learning') || project.data.technologies.some(t => t.toLowerCase().includes('ai') || t.toLowerCase().includes('python'));
+        const isPrivacy = details.category.toLowerCase().includes('privacy') || project.data.technologies.some(t => t.toLowerCase().includes('privacy') || t.toLowerCase().includes('qr'));
+        const isWeb = Boolean(project.data.liveUrl);
+
+        return (
+          <div 
+            class="app-card group flex flex-col bg-white border border-gray-200 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:border-gray-300 transition-all duration-300 hover:-translate-y-1 relative"
+            data-featured={isFeatured ? "true" : "false"}
+            data-ai={isAI ? "true" : "false"}
+            data-privacy={isPrivacy ? "true" : "false"}
+            data-web={isWeb ? "true" : "false"}
+          >
+            <!-- Top Row: App Icon & Store Actions -->
+            <div class="flex items-start gap-4 mb-4">
+              <!-- App Squircle Avatar -->
+              <div class={`w-16 h-16 rounded-2xl bg-gradient-to-br ${details.gradient} flex items-center justify-center text-white shadow-md flex-shrink-0 border-2 border-white group-hover:scale-105 transition-transform duration-300`}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={details.iconSvg} />
+              </div>
+
+              <!-- Title & Category Subtitle -->
+              <div class="flex-grow min-w-0">
+                <div class="flex items-center gap-1.5 mb-0.5">
+                  <h3 class="text-lg font-bold text-gray-900 tracking-tight truncate group-hover:text-blue-600 transition-colors">
+                    {project.data.title}
+                  </h3>
+                </div>
+                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide truncate">
+                  {details.category}
+                </p>
+                
+                <!-- Micro Badge -->
+                <div class="mt-1 flex items-center gap-1.5">
+                  <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-gray-100 text-gray-700">
+                    {details.badge}
+                  </span>
+                  {project.data.liveUrl && (
+                    <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      LIVE
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm text-gray-600 leading-relaxed line-clamp-3 mb-4 flex-grow">
+              {project.data.description}
+            </p>
+
+            <!-- Tech Pills -->
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              {project.data.technologies.slice(0, 3).map(tech => (
+                <span class="text-[11px] font-medium bg-gray-50 text-gray-600 px-2.5 py-1 rounded-lg border border-gray-100">
+                  {tech}
+                </span>
+              ))}
+              {project.data.technologies.length > 3 && (
+                <span class="text-[11px] font-medium bg-gray-50 text-gray-400 px-2 py-1 rounded-lg">
+                  +{project.data.technologies.length - 3}
+                </span>
+              )}
+            </div>
+
+            <!-- App Store Action Footer -->
+            <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2 mt-auto">
+              <a 
+                href={`/projects/${project.id}`} 
+                class="inline-flex items-center gap-1 text-xs font-bold text-gray-700 hover:text-black py-1.5 px-3 rounded-lg hover:bg-gray-100 transition-colors"
+              >
+                <span>Store Page</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+
+              {project.data.liveUrl ? (
+                <a 
+                  href={project.data.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm hover:shadow"
+                >
+                  <span>OPEN</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                </a>
+              ) : project.data.githubUrl ? (
+                <a 
+                  href={project.data.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-900 text-xs font-bold transition-colors"
+                >
+                  <span>CODE</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </a>
+              ) : (
+                <span class="text-xs text-gray-400 font-medium">Internal</span>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
   </div>
-  
+
   <Footer />
 </BaseLayout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.store-filter-btn');
+    const cards = document.querySelectorAll('.app-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active filter button styling
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-black', 'text-white', 'shadow-sm');
+          b.classList.add('text-gray-600', 'border', 'border-gray-200');
+        });
+        btn.classList.add('bg-black', 'text-white', 'shadow-sm');
+        btn.classList.remove('text-gray-600', 'border-gray-200');
+
+        // Filter cards
+        cards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'flex';
+          } else if (filter === 'featured') {
+            card.style.display = card.getAttribute('data-featured') === 'true' ? 'flex' : 'none';
+          } else if (filter === 'ai') {
+            card.style.display = card.getAttribute('data-ai') === 'true' ? 'flex' : 'none';
+          } else if (filter === 'privacy') {
+            card.style.display = card.getAttribute('data-privacy') === 'true' ? 'flex' : 'none';
+          } else if (filter === 'web') {
+            card.style.display = card.getAttribute('data-web') === 'true' ? 'flex' : 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
