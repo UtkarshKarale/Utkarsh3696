@@ -1,0 +1,438 @@
+---
+import LeadPluckLayout from '../../layouts/LeadPluckLayout.astro';
+---
+
+<LeadPluckLayout 
+  title="Privacy Policy — LeadPluck"
+  description="LeadPluck is local-first and privacy-focused. Zero cloud servers, zero analytics, zero data sharing. Read the official privacy policy."
+>
+  <div class="pp-hero">
+    <div class="pp-hero-glow"></div>
+    <div class="pp-hero-inner">
+      <div class="pp-shield-wrap">
+        <svg class="pp-shield-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="pp-date-badge">Last Updated: November 2026</div>
+      <h1 class="pp-title">Privacy Policy</h1>
+      <p class="pp-subtitle">LeadPluck was built with a fundamental principle: <strong>all collected data stays strictly on your computer.</strong> No servers. No telemetry. No middleman databases.</p>
+    </div>
+  </div>
+
+  <!-- Zero Data Guarantee Callout -->
+  <div class="pp-guarantee-wrap">
+    <div class="pp-guarantee">
+      <div class="pp-guarantee-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div>
+        <div class="pp-guarantee-title">Zero Remote Storage Guarantee</div>
+        <div class="pp-guarantee-body">LeadPluck collects <strong>zero telemetry or personal user data</strong>. Leads, search queues, and settings are saved exclusively inside your browser's local extension storage — never transmitted, never logged, never sold.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content grid: TOC + Sections -->
+  <div class="pp-layout">
+
+    <!-- Sticky Table of Contents -->
+    <aside class="pp-toc">
+      <div class="pp-toc-card">
+        <div class="pp-toc-title">Contents</div>
+        <nav>
+          <a href="#s1" class="pp-toc-link">1. Single Purpose & Overview</a>
+          <a href="#s2" class="pp-toc-link">2. What LeadPluck Reads</a>
+          <a href="#s3" class="pp-toc-link">3. Local Storage Model</a>
+          <a href="#s4" class="pp-toc-link">4. What is Shared (Nothing)</a>
+          <a href="#s5" class="pp-toc-link">5. Network Requests</a>
+          <a href="#s6" class="pp-toc-link">6. Extension Permissions</a>
+          <a href="#s7" class="pp-toc-link">7. User Responsibility</a>
+          <a href="#s8" class="pp-toc-link">8. Data Management & Deletion</a>
+          <a href="#s9" class="pp-toc-link">9. Developer Contact</a>
+        </nav>
+        <div class="pp-toc-footer">
+          <a href="/leadpluck" class="pp-toc-back">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Back to LeadPluck
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="pp-content">
+
+      <!-- Section 1 -->
+      <section id="s1" class="pp-section">
+        <h2>1. Single Purpose & Overview</h2>
+        <p>LeadPluck is a browser extension designed for a single specific purpose: <strong>to collect publicly listed business contact details (name, phone, email, website) from web pages the user explicitly opens, store them locally on the user's device, and enable the user to organize, filter, and export them.</strong></p>
+        <p>We do not operate backend servers, account databases, or user telemetry endpoints. Everything operates client-side directly within your browser.</p>
+      </section>
+
+      <!-- Section 2 -->
+      <section id="s2" class="pp-section">
+        <h2>2. What LeadPluck Reads</h2>
+        <p>LeadPluck only inspects data that is already publicly visible on pages you instruct it to view:</p>
+        <ul>
+          <li><strong>Google Maps Business Entries:</strong> Public details visible on Google Maps result lists or place cards (such as business name, phone number, address, official website URL, category, rating, and review count).</li>
+          <li><strong>Business Website Pages:</strong> Public contact details located on web pages you open or scan, specifically checking the website's homepage, Contact page, or About page for public contact information (such as email addresses, phone numbers, WhatsApp links, and public social profile links).</li>
+        </ul>
+        <p>LeadPluck never reads private browsing history, personal user accounts, credentials, or unrelated tabs.</p>
+      </section>
+
+      <!-- Section 3 -->
+      <section id="s3" class="pp-section">
+        <h2>3. Local Storage Model</h2>
+        <p>All captured leads, custom lists, user settings, search presets, and history are stored strictly on your own computer inside your browser's local extension storage (<code>chrome.storage.local</code>).</p>
+        <p>Because there is no remote cloud sync:</p>
+        <ul>
+          <li>Your leads never leave your physical device.</li>
+          <li>No third party (including the developer of LeadPluck) has access to your databases or leads.</li>
+          <li>Data remains safe against remote database breaches.</li>
+        </ul>
+      </section>
+
+      <!-- Section 4 -->
+      <section id="s4" class="pp-section">
+        <h2>4. What is Shared (Strictly Nothing)</h2>
+        <div class="pp-highlight">
+          <strong>Zero External Transmission:</strong> LeadPluck does not send your leads, search queries, settings, or browsing activity to the developer or to any third party.
+        </div>
+        <p>Specifically:</p>
+        <ul>
+          <li>We do not sell, rent, or trade your data to data brokers or advertisers.</li>
+          <li>We do not display advertisements or sponsored listings.</li>
+          <li>We do not include third-party trackers, analytics scripts (e.g. Google Analytics), or behavioral telemetry.</li>
+          <li>We do not load remote code dynamically; all executable code is packaged directly within the extension package.</li>
+        </ul>
+      </section>
+
+      <!-- Section 5 -->
+      <section id="s5" class="pp-section">
+        <h2>5. Network Requests</h2>
+        <p>LeadPluck only executes network requests that you directly initiate through your own browser session:</p>
+        <ul>
+          <li><strong>Google Maps Batch Searches:</strong> Opening search query URLs that you input into the Batch Runner.</li>
+          <li><strong>Business Contact Fetching:</strong> Making HTTP requests directly to the business's own public website (e.g. <code>example.com/contact</code>) to parse public contact emails.</li>
+        </ul>
+        <p>No connections are made to any proprietary developer server or external analytical APIs.</p>
+      </section>
+
+      <!-- Section 6 -->
+      <section id="s6" class="pp-section">
+        <h2>6. Extension Permissions Justification</h2>
+        <p>To operate locally and perform its stated single purpose, LeadPluck requests the following permissions:</p>
+        <table class="pp-table">
+          <thead>
+            <tr>
+              <th>Permission</th>
+              <th>Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>storage</code> / <code>unlimitedStorage</code></td>
+              <td>Enables storing your leads, custom lists, and settings locally on your machine without arbitrary size restrictions.</td>
+            </tr>
+            <tr>
+              <td><code>alarms</code></td>
+              <td>Coordinates timing intervals for the batch search runner and maintains local automatic restore points.</td>
+            </tr>
+            <tr>
+              <td><code>Host permissions</code></td>
+              <td>Permits scanning business websites you open and fetching contact/about pages for listed websites to discover public email addresses.</td>
+            </tr>
+            <tr>
+              <td><code>Content Scripts</code></td>
+              <td>Parses publicly visible business information displayed on Google Maps search pages you view.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Section 7 -->
+      <section id="s7" class="pp-section">
+        <h2>7. User Responsibility & Compliance</h2>
+        <p>Contact information extracted from public websites may constitute personal data under various jurisdictions. As the operator of the tool, you are responsible for using all collected data lawfully and in full compliance with:</p>
+        <ul>
+          <li><strong>Applicable Data Protection Laws:</strong> Such as the General Data Protection Regulation (GDPR), India's Digital Personal Data Protection (DPDP) Act, California Consumer Privacy Act (CCPA), etc.</li>
+          <li><strong>Anti-Spam Regulations:</strong> Including CAN-SPAM, the UK Privacy and Electronic Communications Regulations (PECR), and regional opt-out guidelines.</li>
+          <li><strong>Website Terms of Service:</strong> Complying with terms and conditions of third-party platforms.</li>
+        </ul>
+      </section>
+
+      <!-- Section 8 -->
+      <section id="s8" class="pp-section">
+        <h2>8. Data Management & Deletion</h2>
+        <p>You retain 100% control over all data at all times:</p>
+        <ul>
+          <li><strong>CSV Export:</strong> Download all or filtered subsets of your leads to a standard CSV file anytime.</li>
+          <li><strong>Trash & Soft Delete:</strong> Move individual leads or entire lists to the built-in Trash.</li>
+          <li><strong>Full Purge:</strong> Click "Clear all" in the Settings tab to instantly erase all stored leads and preferences.</li>
+          <li><strong>Uninstall:</strong> Removing LeadPluck from your Chrome browser immediately and permanently erases all associated extension storage from your machine.</li>
+        </ul>
+      </section>
+
+      <!-- Section 9 -->
+      <section id="s9" class="pp-section">
+        <h2>9. Developer & Contact Information</h2>
+        <p>If you have any questions or require clarification regarding LeadPluck or this Privacy Policy, please reach out directly:</p>
+        <div class="pp-contact-card">
+          <p><strong>Developer:</strong> Utkarsh Karale</p>
+          <p><strong>Email:</strong> <a href="mailto:karaleutkarsh3696@gmail.com" class="text-purple-400 hover:underline">karaleutkarsh3696@gmail.com</a></p>
+          <p><strong>Website:</strong> <a href="https://utkarshkarale.github.io/" class="text-purple-400 hover:underline">https://utkarshkarale.github.io/</a></p>
+          <p><strong>Project Directory:</strong> <a href="/projects/cleanupload" class="text-purple-400 hover:underline">CleanUpload</a> &amp; <a href="/leadpluck" class="text-purple-400 hover:underline">LeadPluck</a></p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</LeadPluckLayout>
+
+<style>
+  .pp-hero {
+    position: relative;
+    padding: 80px 24px 48px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pp-hero-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 250px;
+    background: radial-gradient(ellipse at center, rgba(147, 51, 234, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .pp-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .pp-shield-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: rgba(147, 51, 234, 0.1);
+    border: 1px solid rgba(147, 51, 234, 0.25);
+    margin-bottom: 20px;
+  }
+  .pp-shield-icon {
+    width: 32px;
+    height: 32px;
+    stroke: #a855f7;
+  }
+  .pp-date-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a1a1aa;
+    margin-bottom: 16px;
+  }
+  .pp-title {
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+  .pp-subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #a1a1aa;
+  }
+  .pp-guarantee-wrap {
+    max-width: 860px;
+    margin: 0 auto 48px;
+    padding: 0 24px;
+  }
+  .pp-guarantee {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: rgba(147, 51, 234, 0.08);
+    border: 1px solid rgba(147, 51, 234, 0.25);
+    border-radius: 16px;
+    padding: 20px 24px;
+  }
+  .pp-guarantee-icon {
+    flex-shrink: 0;
+    color: #c084fc;
+    margin-top: 2px;
+  }
+  .pp-guarantee-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .pp-guarantee-body {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #d4d4d8;
+  }
+  .pp-layout {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 768px) {
+    .pp-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .pp-toc {
+      position: static;
+    }
+  }
+  .pp-toc {
+    position: sticky;
+    top: 80px;
+  }
+  .pp-toc-card {
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .pp-toc-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #71717a;
+    margin-bottom: 12px;
+  }
+  .pp-toc-link {
+    display: block;
+    font-size: 12px;
+    color: #a1a1aa;
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.15s;
+    line-height: 1.4;
+  }
+  .pp-toc-link:hover {
+    color: #c084fc;
+  }
+  .pp-toc-footer {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .pp-toc-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #71717a;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .pp-toc-back:hover {
+    color: #fff;
+  }
+  .pp-content {
+    min-width: 0;
+  }
+  .pp-section {
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .pp-section:last-child {
+    border-bottom: none;
+  }
+  .pp-section h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .pp-section p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #a1a1aa;
+    margin-bottom: 12px;
+  }
+  .pp-section p:last-child {
+    margin-bottom: 0;
+  }
+  .pp-section ul {
+    margin: 8px 0 16px 20px;
+    list-style-type: disc;
+  }
+  .pp-section li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #a1a1aa;
+    margin-bottom: 8px;
+  }
+  .pp-highlight {
+    background: rgba(147, 51, 234, 0.08);
+    border-left: 3px solid #9333ea;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e4e4e7;
+    margin: 16px 0;
+  }
+  .pp-table {
+    width: 100%;
+    font-size: 13px;
+    border-collapse: collapse;
+    margin: 16px 0;
+  }
+  .pp-table th, .pp-table td {
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .pp-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+    font-weight: 700;
+  }
+  .pp-table td {
+    color: #a1a1aa;
+  }
+  .pp-table code {
+    font-family: monospace;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 2px 5px;
+    border-radius: 4px;
+    color: #c084fc;
+  }
+  .pp-contact-card {
+    background: #141418;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 14px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #a1a1aa;
+  }
+</style>
