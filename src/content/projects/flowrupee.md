@@ -15,13 +15,18 @@ featured: true
   </a>
 </div>
 
-**Category:** Personal Finance / Productivity &nbsp;|&nbsp; **Privacy Policy:** [/flowrupee/policy](/flowrupee/policy)
+**Category:** Personal Finance / Productivity &nbsp;|&nbsp; **Package Name:** `online.jiapp.flowrupee` &nbsp;|&nbsp; **Privacy Policy:** [/flowrupee/policy](/flowrupee/policy)
 
-### Overview
+---
 
-**FlowRupee** is an all-in-one personal finance app designed specifically for everyday Indian consumers, roommates, freelancers, and small teams. It eliminates the hassle of tracking where your money goes by providing instant expense logging, intelligent categorization, split bill management, and visual budget analytics.
+### TL;DR / Quick Answer
 
-Whether you are tracking daily chai and grocery expenses or managing shared flat rent, electricity, and trips with friends, FlowRupee keeps your finances clear, balanced, and completely under your control.
+> **What is FlowRupee?**  
+> FlowRupee is a fast, privacy-focused Android personal finance and bill-splitting app. It lets you log daily UPI & cash transactions in under 3 seconds, manage shared roommate/flatmate balances without separate split apps, and analyze monthly budgets offline with zero ad tracking.
+> 
+> - **Platform:** Android (Google Play Store)
+> - **Target Audience:** Indian consumers, college students, roommates, freelancers, and small business owners.
+> - **Key USP:** Sub-3-second expense logging, built-in group expense balancing, local biometric lock, 100% data privacy, and offline-first SQLite synchronization.
 
 ---
 
@@ -48,7 +53,26 @@ Whether you are tracking daily chai and grocery expenses or managing shared flat
 
 ---
 
-### Download & Links
+### Frequently Asked Questions (FAQ)
+
+#### Q1: How does FlowRupee differ from traditional expense tracking apps?
+Most expense tracking apps require navigating multiple screens and filling dozens of fields, or they require full SMS inbox permissions to scrape banking notifications. FlowRupee is designed for **instant manual entry (<3 seconds)** and **seamless bill splitting** in one app, with zero intrusive SMS scraping, no spam ads, and full biometric security.
+
+#### Q2: Can I use FlowRupee without an active internet connection?
+**Yes.** FlowRupee is engineered offline-first. All your expense records, split settlements, and category budgets are stored securely on your local device using high-performance SQLite storage. Whenever an internet connection is established, your shared group states sync automatically.
+
+#### Q3: How does the group bill splitting feature work?
+You can create groups for flats, road trips, or dining out. Whenever someone pays a bill, record who paid and who participated. FlowRupee calculates the net balance and simplifies settlements so you only have to make the minimum required payments.
+
+#### Q4: Does FlowRupee sell or share my financial transaction data?
+**No.** FlowRupee never sells, rents, or shares your personal financial transactions with third-party advertisers, credit scoring agencies, or loan lenders. Read our detailed [Privacy Policy](/flowrupee/policy) for complete transparency.
+
+#### Q5: Which payment modes can I track?
+FlowRupee supports all primary Indian payment methods, including UPI (Google Pay, PhonePe, Paytm, CRED), Cash, Credit Cards, Debit Cards, and Net Banking.
+
+---
+
+### Download & Official Links
 
 <div style="margin: 16px 0;">
   <a href="https://play.google.com/store/apps/details?id=online.jiapp.flowrupee" target="_blank" rel="noopener noreferrer">
@@ -56,6 +80,8 @@ Whether you are tracking daily chai and grocery expenses or managing shared flat
   </a>
 </div>
 
-- **Google Play Direct Link:** [FlowRupee on Google Play](https://play.google.com/store/apps/details?id=online.jiapp.flowrupee)
+- **Google Play Store Direct Link:** [Download FlowRupee on Google Play](https://play.google.com/store/apps/details?id=online.jiapp.flowrupee)
+- **Official Package ID:** `online.jiapp.flowrupee`
 - **Privacy Policy:** [FlowRupee Privacy Policy](/flowrupee/policy)
+- **Account Deletion & Data Rights:** [Delete Account Page](/flowrupee/delete-account)
 - **Developer:** Utkarsh Karale (JiApp Online)
