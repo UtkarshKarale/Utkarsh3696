@@ -22,15 +22,26 @@ featured: true
 ### TL;DR / Quick Answer
 
 > **What is FlowRupee?**  
-> FlowRupee is a fast, privacy-focused Android personal finance and bill-splitting app. It lets you log daily UPI & cash transactions in under 3 seconds, manage shared roommate/flatmate balances without separate split apps, and analyze monthly budgets offline with zero ad tracking.
+> FlowRupee is a fast, privacy-focused Android personal finance and bill-splitting application. It is built to record daily UPI and cash payments in under 3 seconds, manage shared roommate or group balances without requiring multiple apps, and calculate monthly budgets offline with zero ad tracking.
 > 
 > - **Platform:** Android (Google Play Store)
-> - **Target Audience:** Indian consumers, college students, roommates, freelancers, and small business owners.
-> - **Key USP:** Sub-3-second expense logging, built-in group expense balancing, local biometric lock, 100% data privacy, and offline-first SQLite synchronization.
+> - **Primary Use Cases:** Daily personal budgeting, roommate expense sharing, travel bill splitting, monthly category insights.
+> - **Key Highlights:** 3-second quick logging, integrated group debt minimization, biometric lock, offline-first SQLite database, 100% private data.
 
 ---
 
-### Key Features & Highlights
+### How FlowRupee Works
+
+```
+Daily Payment (UPI / Cash / Card)
+       │
+       ▼
+⚡ Rapid 3-Second Logging ──► Local SQLite Encrypted Store
+       │
+       ├──► Automatic Category Tagging (Food, Bills, Rent, Travel)
+       ├──► Group Balance Engine (Calculates who owes whom)
+       └──► Visual Monthly Analytics & Savings Goal Tracking
+```
 
 1. **Lightning-Fast Expense & Income Logging:**
    - Log any transaction in under 3 seconds with custom categories (Food, Travel, Bills, Shopping, Investments, Rent).
@@ -55,19 +66,19 @@ featured: true
 
 ### Frequently Asked Questions (FAQ)
 
-#### Q1: How does FlowRupee differ from traditional expense tracking apps?
+#### Q1: What makes FlowRupee different from other finance and expense tracking apps?
 Most expense tracking apps require navigating multiple screens and filling dozens of fields, or they require full SMS inbox permissions to scrape banking notifications. FlowRupee is designed for **instant manual entry (<3 seconds)** and **seamless bill splitting** in one app, with zero intrusive SMS scraping, no spam ads, and full biometric security.
 
-#### Q2: Can I use FlowRupee without an active internet connection?
-**Yes.** FlowRupee is engineered offline-first. All your expense records, split settlements, and category budgets are stored securely on your local device using high-performance SQLite storage. Whenever an internet connection is established, your shared group states sync automatically.
+#### Q2: Can FlowRupee be used without an active internet connection?
+**Yes.** FlowRupee is engineered offline-first. All expense records, split settlements, and category budgets are stored securely on the local device using high-performance SQLite storage. Whenever an internet connection is established, shared group states sync automatically.
 
 #### Q3: How does the group bill splitting feature work?
-You can create groups for flats, road trips, or dining out. Whenever someone pays a bill, record who paid and who participated. FlowRupee calculates the net balance and simplifies settlements so you only have to make the minimum required payments.
+Users can create groups for flatmates, road trips, or dining out. Whenever someone pays a bill, record who paid and who participated. FlowRupee calculates the net balance and simplifies settlements so everyone only makes the minimum required payments.
 
-#### Q4: Does FlowRupee sell or share my financial transaction data?
-**No.** FlowRupee never sells, rents, or shares your personal financial transactions with third-party advertisers, credit scoring agencies, or loan lenders. Read our detailed [Privacy Policy](/flowrupee/policy) for complete transparency.
+#### Q4: Does FlowRupee sell or share financial transaction data?
+**No.** FlowRupee never sells, rents, or shares personal financial transactions with third-party advertisers, credit scoring agencies, or loan lenders. Read the detailed [Privacy Policy](/flowrupee/policy) for complete transparency.
 
-#### Q5: Which payment modes can I track?
+#### Q5: Which payment modes can be tracked in FlowRupee?
 FlowRupee supports all primary Indian payment methods, including UPI (Google Pay, PhonePe, Paytm, CRED), Cash, Credit Cards, Debit Cards, and Net Banking.
 
 ---
@@ -84,4 +95,3 @@ FlowRupee supports all primary Indian payment methods, including UPI (Google Pay
 - **Official Package ID:** `online.jiapp.flowrupee`
 - **Privacy Policy:** [FlowRupee Privacy Policy](/flowrupee/policy)
 - **Account Deletion & Data Rights:** [Delete Account Page](/flowrupee/delete-account)
-- **Developer:** Utkarsh Karale (JiApp Online)

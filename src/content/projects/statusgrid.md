@@ -11,11 +11,16 @@ featured: true
 
 **Live Web App & PWA:** [statusgrid.pages.dev](https://statusgrid.pages.dev) &nbsp;|&nbsp; **Category:** Design / Social Media / PWA
 
-### Overview
+---
 
-**StatusGrid** is a mobile-first Progressive Web App (PWA) tailored for Indian festivals, cultural events, and daily greetings (शुभ प्रभात, शुभ रात्री, वाढदिवस, सण विशेष). It allows users to personalize curated high-resolution festival templates with their own portrait photos, name, political designation, and social handles with one click.
+### TL;DR / Quick Answer
 
-With zero installation barriers, StatusGrid runs directly in the browser or as an installed standalone app on any smartphone.
+> **What is StatusGrid?**  
+> StatusGrid is a web-based festival greeting and poster creator built for Indian festivals (Diwali, Gudi Padwa, Shiv Jayanti, Ganesh Chaturthi, Daily Suvichar). It lets users personalize high-resolution 1080p posters and video statuses with their own photo, name, and designation in seconds, right from their mobile browser or installed PWA, with direct 1-tap WhatsApp sharing.
+>
+> - **Platform:** Progressive Web App (Mobile Chrome, Safari, Desktop)
+> - **Access Link:** [https://statusgrid.pages.dev](https://statusgrid.pages.dev)
+> - **Key Highlights:** No app store download required, 1080x1920 HD canvas rendering, Devanagari regional typography, in-browser animated video maker, instant 1-tap WhatsApp share.
 
 ---
 
@@ -25,8 +30,8 @@ With zero installation barriers, StatusGrid runs directly in the browser or as a
    - Over 50+ templates for Diwali (वसुबारस, धनत्रयोदशी, लक्ष्मीपूजन, पाडवा, भाऊबीज), Chhatrapati Shivaji Maharaj Jayanti, Ganesh Chaturthi, and morning greetings.
    - Chronological calendar engine that highlights today's and tomorrow's upcoming celebrations automatically.
 
-2. **Client-Side High Resolution Canvas Rendering:**
-   - Real-time client-side compositing at 1080x1920 (9:16 WhatsApp status aspect ratio).
+2. **High-Resolution Poster Compositing:**
+   - Instant compositing at 1080x1920 (9:16 WhatsApp status aspect ratio).
    - Instant background removal cutout support, photo zoom, repositioning, and flip controls.
    - Devanagari typography support with curated fonts (*Yatra One, Baloo 2, Modak, Anek Devanagari*).
 
@@ -40,6 +45,23 @@ With zero installation barriers, StatusGrid runs directly in the browser or as a
 
 ---
 
+### Frequently Asked Questions (FAQ)
+
+#### Q1: Does StatusGrid require downloading a large app from the Play Store?
+**No.** StatusGrid is a Progressive Web App (PWA). It opens instantly in any mobile browser (Chrome, Safari, Firefox) at [statusgrid.pages.dev](https://statusgrid.pages.dev), and can be added to your home screen with zero storage overhead.
+
+#### Q2: Can users add their own photos, names, and titles to festival posters?
+**Yes.** Users can upload any photo, apply automatic cutout masking, enter their name and title/designation, and immediately generate a polished 1080p festival poster ready for WhatsApp Status.
+
+#### Q3: Which regional languages and fonts are supported?
+StatusGrid includes native Devanagari typography with fonts like Yatra One, Baloo 2, Modak, and Anek Devanagari, making it ideal for Marathi and Hindi festive wishes.
+
+#### Q4: How does the video status feature work?
+Users can select a festival poster, choose festival music or upload their own audio, apply animation effects like sparkling particles or camera zoom, and render a ready-to-share vertical video status directly in the browser.
+
+---
+
 ### Explore StatusGrid
 
-- **Website:** [https://statusgrid.pages.dev](https://statusgrid.pages.dev)
+- **Live Web App:** [https://statusgrid.pages.dev](https://statusgrid.pages.dev)
+- **Category:** Festival Greetings, Social Media Marketing & Poster Design
