@@ -1,8 +1,8 @@
 ---
-title: "FlowRupee – Expense Tracker & Split"
-description: "FlowRupee is an intelligent personal finance and expense manager for Android. Track expenses, split group bills with friends, visualize spending analytics, and control budgets with 100% data privacy."
+title: "FlowRupee – Free & Offline Personal Finance Tracking App for India"
+description: "FlowRupee is a 100% offline, privacy-first free personal finance and automated SMS expense tracking app for Android in India. Zero bank logins, zero cloud storage, instant UPI logging, and roommate bill splitting."
 publishedAt: "2026-11-08"
-technologies: ["React Native", "Expo", "Android", "Cloudflare Workers", "SQLite"]
+technologies: ["Android", "Finance Tracking App", "Offline-First", "SQLite", "Biometrics", "UPI Expense Tracker", "Free App"]
 liveUrl: "https://play.google.com/store/apps/details?id=online.jiapp.flowrupee"
 featured: true
 ---

@@ -3,7 +3,7 @@ title: "Automatic Expense Tracking via SMS in India: Convenience vs Privacy"
 description: "How automated SMS financial tracking works in India, why traditional apps leak personal data, and how local-first parsers track expenses safely without remote cloud harvesting."
 publishedAt: "2026-11-08"
 coverImage: "/flowrupee-icon.png"
-tags: ["Personal Finance", "SMS Tracking", "FlowRupee", "Fintech", "Privacy", "Expense Tracker"]
+tags: ["Finance Tracking App", "Free Finance App", "SMS Expense Tracker", "Personal Finance India", "UPI Expense Tracker", "FlowRupee", "Offline Budgeting", "Privacy"]
 featured: false
 draft: false
 ---

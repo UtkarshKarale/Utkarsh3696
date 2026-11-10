@@ -21,11 +21,17 @@ const currentYear = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content="finance tracking app, free finance tracking app, expense tracker india, best free expense tracker app, automatic expense tracker app, upi expense tracker, offline finance app, offline expense manager, sms expense tracker, personal finance app india, bill split app, roommate expense manager, free budgeting app, daily money tracker, no ads finance app, privacy first expense tracker" />
+    <meta name="author" content="Utkarsh Karale" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large" />
     <link rel="canonical" href="https://utkarshkarale.github.io/flowrupee" />
     <link rel="icon" type="image/png" href="/flowrupee-icon.png" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FlowRupee" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content="https://utkarshkarale.github.io/flowrupee" />
@@ -36,6 +42,53 @@ const currentYear = new Date().getFullYear();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://utkarshkarale.github.io/flowrupee-icon.png" />
+
+    <!-- Structured Data: SoftwareApplication & FAQ -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "FlowRupee",
+          "operatingSystem": "Android",
+          "applicationCategory": "FinanceApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "description": "Free, privacy-first personal finance and SMS expense tracker for Android in India. 100% offline SQLite storage, instant UPI logging, and group bill splitting.",
+          "url": "https://utkarshkarale.github.io/flowrupee",
+          "downloadUrl": "https://play.google.com/store/apps/details?id=online.jiapp.flowrupee",
+          "author": {
+            "@type": "Person",
+            "name": "Utkarsh Karale",
+            "url": "https://utkarshkarale.github.io/"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the best free finance tracking app in India?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "FlowRupee is a completely free, 100% offline personal finance and expense tracking app for Android in India. It requires zero bank logins, features zero intrusive ads, and logs daily UPI transactions in under 3 seconds."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I track UPI and cash expenses offline without bank login?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. FlowRupee stores all financial records, category budgets, and roommate balances in an encrypted local SQLite database on your device with no remote cloud uploads."
+              }
+            }
+          ]
+        }
+      ]
+    })} />
 
     <!-- Inter Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
