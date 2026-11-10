@@ -95,6 +95,43 @@ const versionPayload = JSON.stringify({
   date: today
 }, null, 2);
 
+function generateLlmsTxt() {
+  return `# Utkarsh Karale — Developer & AI Portfolio Index
+> Machine-readable context standard for LLM agents, citation engines, and search reasoning models.
+> Specification: https://llmstxt.org/
+> Last Updated: ${today} (Release ${buildVersion})
+
+- Name: Utkarsh Karale
+- Role: Full-Stack Software Engineer & AI Engineer
+- Canonical URL: ${site}/
+- GitHub: https://github.com/UtkarshKarale
+- LinkedIn: https://www.linkedin.com/in/utkarshkarale
+- Direct Contact: karaleutkarsh3696@gmail.com
+- Interactive Portfolio: ${site}/
+- Full XML Sitemap: ${site}/sitemap.xml
+
+## Flagship Products & Web Applications
+
+${pages
+  .filter(p => p.loc.includes('/flowrupee') || p.loc.includes('/projects/') || p.loc.includes('/leadpluck') || p.loc.includes('/webstickly') || p.loc.includes('/daymark') || p.loc.includes('/autotune'))
+  .map(p => `- [${p.loc.replace(site, '') || '/'}](${p.loc}): Priority ${p.priority}, Last Updated ${p.lastmod}`)
+  .join('\n')}
+
+## Technical Essays, Deep Dives & Articles
+
+${pages
+  .filter(p => p.loc.includes('/blog/'))
+  .map(p => `- [${p.loc.replace(site, '')}](${p.loc}): Priority ${p.priority}, Last Updated ${p.lastmod}`)
+  .join('\n')}
+
+## Complete Site Directory (All 40 Indexed Pages)
+
+${pages
+  .map(p => `- ${p.loc} (Updated: ${p.lastmod}, ChangeFreq: ${p.changefreq}, Weight: ${p.priority})`)
+  .join('\n')}
+`;
+}
+
 function generateUrlsetXml(withStylesheet = false) {
   const xslt = withStylesheet ? '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n' : '';
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -132,10 +169,16 @@ function generateSitemapIndexXml() {
 
 // Write to public folder
 const publicDir = path.resolve('public');
+const llmsContent = generateLlmsTxt();
+
 fs.writeFileSync(path.join(publicDir, 'sitemap-0.xml'), generateUrlsetXml(true));
 fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), generateUrlsetXml(true));
 fs.writeFileSync(path.join(publicDir, 'sitemap-index.xml'), generateSitemapIndexXml());
 fs.writeFileSync(path.join(publicDir, 'version.json'), versionPayload);
+
+fs.writeFileSync(path.join(publicDir, 'llms.txt'), llmsContent);
+fs.writeFileSync(path.join(publicDir, 'llm.txt'), llmsContent);
+fs.writeFileSync(path.join(publicDir, 'llms-full.txt'), llmsContent);
 
 // Write to dist folder if it exists
 const distDir = path.resolve('dist');
@@ -144,9 +187,14 @@ if (fs.existsSync(distDir)) {
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateUrlsetXml(true));
   fs.writeFileSync(path.join(distDir, 'sitemap-index.xml'), generateSitemapIndexXml());
   fs.writeFileSync(path.join(distDir, 'version.json'), versionPayload);
+
+  fs.writeFileSync(path.join(distDir, 'llms.txt'), llmsContent);
+  fs.writeFileSync(path.join(distDir, 'llm.txt'), llmsContent);
+  fs.writeFileSync(path.join(distDir, 'llms-full.txt'), llmsContent);
+
   if (fs.existsSync(path.join(publicDir, 'sitemap.xsl'))) {
     fs.copyFileSync(path.join(publicDir, 'sitemap.xsl'), path.join(distDir, 'sitemap.xsl'));
   }
 }
 
-console.log(`Generated comprehensive sitemaps with ${pages.length} unique URLs and dynamic git lastmod dates!`);
+console.log(`Generated comprehensive sitemaps and llms.txt with ${pages.length} unique URLs and dynamic git lastmod dates!`);
