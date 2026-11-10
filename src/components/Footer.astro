@@ -364,13 +364,40 @@ const navSections = [
     100% { transform: rotate(360deg); }
   }
 
-  /* River wave flow animations */
-  .river-flow-1 { animation: waveFlow 22s linear infinite; }
-  .river-flow-2 { animation: waveFlow 16s linear infinite reverse; }
-  .river-flow-3 { animation: waveFlow 11s linear infinite; }
-  @keyframes waveFlow {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  /* Water Waves - Pure Blue Water Spectrum Across All Seasons */
+  .waves-fade-top { 
+    background: linear-gradient(to top, rgba(224, 242, 254, 0.75), transparent); 
+  }
+  .wave-path-1 { 
+    fill: #bae6fd !important; /* Sky blue water */
+  }
+  .wave-path-2 { 
+    fill: #38bdf8 !important; /* Vibrant ocean water */
+  }
+  .wave-path-3 { 
+    fill: #0284c7 !important; /* Deep water wave */
+  }
+
+  /* Night mode water waves - Deep Luminous Ocean Blue */
+  .theme-night-monsoon .waves-fade-top,
+  .theme-night-summer .waves-fade-top,
+  .theme-night-winter .waves-fade-top {
+    background: linear-gradient(to top, rgba(3, 105, 161, 0.4), transparent) !important;
+  }
+  .theme-night-monsoon .wave-path-1,
+  .theme-night-summer .wave-path-1,
+  .theme-night-winter .wave-path-1 { 
+    fill: #0c4a6e !important; /* Midnight deep blue */
+  }
+  .theme-night-monsoon .wave-path-2,
+  .theme-night-summer .wave-path-2,
+  .theme-night-winter .wave-path-2 { 
+    fill: #0284c7 !important; /* Sapphire blue */
+  }
+  .theme-night-monsoon .wave-path-3,
+  .theme-night-summer .wave-path-3,
+  .theme-night-winter .wave-path-3 { 
+    fill: #38bdf8 !important; /* Luminous surface blue */
   }
 
   /* ============================================================
