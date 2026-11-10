@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import CustomCursor from '../components/CustomCursor.astro';
+import PrivacyConsentBanner from '../components/PrivacyConsentBanner.astro';
 
 interface Props {
   title?: string;
@@ -14,18 +15,20 @@ const {
   title = 'Utkarsh Karale — Full-Stack Developer & AI Engineer Portfolio',
   description = 'Portfolio of Utkarsh Karale, a Full-Stack Software Engineer and AI Engineer specializing in scalable web apps, AI tools, and robust software architecture.',
   image = '/og-image.png',
-  canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.com'),
+  canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://utkarshkarale.github.io'),
   type = 'website',
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://utkarshkarale.github.io';
 
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://example.com/#person",
+      "@id": `${siteUrl}/#person`,
       "name": "Utkarsh Karale",
-      "url": "https://example.com/",
+      "url": `${siteUrl}/`,
       "jobTitle": "Full-Stack Developer & AI Engineer",
       "sameAs": [
         "https://github.com/UtkarshKarale",
@@ -45,9 +48,9 @@ const structuredData = {
       "@type": type === 'article' ? 'BlogPosting' : 'WebSite',
       "name": title,
       "description": description,
-      "url": canonicalURL,
-      "image": new URL(image, Astro.site || 'https://example.com'),
-      "author": { "@id": "https://example.com/#person" }
+      "url": canonicalURL.toString(),
+      "image": new URL(image, Astro.site || 'https://utkarshkarale.github.io').toString(),
+      "author": { "@id": `${siteUrl}/#person` }
     }
   ]
 };
@@ -109,6 +112,8 @@ const structuredData = {
     <main class="flex-grow">
       <slot />
     </main>
+
+    <PrivacyConsentBanner />
 
     <!-- Floating Draggable Handle Button (Bottom-Right) -->
     <div id="tally-floating-btn-container" style="position: fixed; bottom: 24px; right: 24px; z-index: 99999; touch-action: none; user-select: none;">

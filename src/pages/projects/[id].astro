@@ -17,12 +17,64 @@ const { Content } = await render(project);
 
 // Generate avatar initial or icon
 const firstLetter = project.data.title.charAt(0).toUpperCase();
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://utkarshkarale.github.io';
+const canonicalPageUrl = `${siteUrl}/projects/${project.id}`;
+
+// Structured Data for Google Rich Snippets (BreadcrumbList + SoftwareApplication)
+const projectStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": `${siteUrl}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Projects",
+          "item": `${siteUrl}/projects`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": project.data.title,
+          "item": canonicalPageUrl
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": project.data.title,
+      "description": project.data.description,
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Web, Android, Windows, macOS, Linux",
+      "url": canonicalPageUrl,
+      "author": {
+        "@type": "Person",
+        "name": "Utkarsh Karale",
+        "url": `${siteUrl}/`
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  ]
+};
 ---
 
 <BaseLayout 
   title={`${project.data.title} – Product & Store Listing | Utkarsh Karale`} 
   description={project.data.description}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(projectStructuredData)} />
   <Header />
   
   <article class="pt-24 pb-20 max-w-4xl mx-auto px-6">

@@ -1,94 +1,605 @@
 ---
 const currentYear = new Date().getFullYear();
 
-// Generate random raindrops with much higher frequency
-const rainDrops = Array.from({ length: 150 }).map(() => ({
-  left: Math.random() * 100,
-  delay: Math.random() * 1.5,
-  duration: Math.random() * 0.3 + 0.3 // 0.3s to 0.6s (much faster falling)
+// Base particle pool generated statically for SSR (reused with CSS styles for rain, snow, or heat embers/shimmer)
+const particles = Array.from({ length: 65 }).map((_, i) => ({
+  id: i,
+  left: (i * 1.54) % 100, // evenly distributed initial positions
+  delay: ((i * 0.17) % 2.5).toFixed(2),
+  duration: (0.7 + ((i * 0.13) % 2.2)).toFixed(2),
+  size: (2 + (i % 4)),
 }));
+
+const navSections = [
+  {
+    title: 'Navigation',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Projects & Store', href: '/projects' },
+      { label: 'Technical Writing', href: '/blog' },
+      { label: 'About Experience', href: '/#experience' },
+      { label: 'Skills & Stack', href: '/#skills' },
+      { label: 'Achievements', href: '/#achievements' },
+    ]
+  },
+  {
+    title: 'Flagship Products',
+    links: [
+      { label: 'FlowRupee — Offline SMS Finance', href: '/projects/flowrupee' },
+      { label: 'StatusGrid — Festival Poster PWA', href: '/projects/statusgrid' },
+      { label: 'LeadPluck — Maps Contact Plucker', href: '/leadpluck' },
+      { label: 'WebStickly — Persistent Web Sticky Notes', href: '/webstickly' },
+      { label: 'CleanUpload — Client-side EXIF Cleaner', href: '/projects/cleanupload' },
+      { label: 'Monitoro — Telegram Downtime Alerts', href: '/projects/monitoro' },
+      { label: 'Daymark — Visual Milestones', href: '/daymark' },
+    ]
+  },
+  {
+    title: 'Featured Essays',
+    links: [
+      { label: 'SMS Expense Tracking Architecture', href: '/blog/automatic-expense-tracking-sms-india' },
+      { label: 'Why Personal Finance Apps Fail in India', href: '/blog/why-personal-finance-tracking-fails-in-india-flowrupee' },
+      { label: 'Building StatusGrid with Canvas & PWA', href: '/blog/building-statusgrid-web-technologies-for-festival-posters' },
+      { label: 'AI Image Metadata & C2PA Cleaning', href: '/blog/understanding-ai-image-metadata' },
+      { label: 'Zero-Trust SSH via Cloudflare Tunnels', href: '/blog/ssh-cloudflare-tunnel' },
+    ]
+  },
+  {
+    title: 'Legal & Machine Index',
+    links: [
+      { label: 'Sitemap (XML Index)', href: '/sitemap-index.xml' },
+      { label: 'Robots.txt (Crawler Directives)', href: '/robots.txt' },
+      { label: 'LLMs.txt (Machine Context Standard)', href: '/llms.txt' },
+      { label: 'LLMs-Full.txt (Complete Context)', href: '/llms-full.txt' },
+      { label: 'FlowRupee Privacy Policy', href: '/flowrupee/policy' },
+      { label: 'FlowRupee Account Deletion', href: '/flowrupee/delete-account' },
+      { label: 'LeadPluck Privacy Policy', href: '/leadpluck/privacy' },
+      { label: 'WebStickly Privacy Policy', href: '/webstickly/privacy' },
+      { label: 'Daymark Privacy Policy', href: '/daymark/privacy' },
+    ]
+  }
+];
 ---
 
-<footer class="relative mt-32 overflow-hidden pt-32 pb-12 bg-transparent">
+<footer 
+  id="dynamic-seasonal-footer" 
+  class="relative mt-32 overflow-hidden pt-28 pb-12 transition-colors duration-700 bg-gray-50/70 text-gray-900 border-t border-gray-200/80 theme-day-monsoon"
+>
   
-  <!-- Rain Animation -->
-  <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden opacity-40">
-    {rainDrops.map(drop => (
+  <!-- Dynamic Sky Ambient Backdrops -->
+  <div class="sky-ambient-layer absolute inset-0 pointer-events-none z-0 transition-opacity duration-700"></div>
+
+  <!-- Celestial Element (Sun or Moon SVG) -->
+  <div id="celestial-body" class="celestial-container absolute top-6 right-8 sm:right-16 z-0 pointer-events-none transition-all duration-700 opacity-0">
+    <!-- Sun (Daytime Summer/Monsoon/Winter) -->
+    <div class="celestial-sun relative w-16 h-16 sm:w-20 sm:h-20">
+      <div class="absolute inset-0 rounded-full bg-amber-400/20 blur-xl animate-pulse"></div>
+      <div class="w-full h-full rounded-full bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-200 shadow-[0_0_40px_rgba(251,191,36,0.6)]"></div>
+      <!-- Subtle Sun Rays -->
+      <svg class="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)] text-amber-300/40 animate-spin-slow" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="50" y1="5" x2="50" y2="15"/>
+        <line x1="50" y1="85" x2="50" y2="95"/>
+        <line x1="5" y1="50" x2="15" y2="50"/>
+        <line x1="85" y1="50" x2="95" y2="50"/>
+        <line x1="18" y1="18" x2="25" y2="25"/>
+        <line x1="75" y1="75" x2="82" y2="82"/>
+        <line x1="18" y1="82" x2="25" y2="75"/>
+        <line x1="75" y1="25" x2="82" y2="18"/>
+      </svg>
+    </div>
+
+    <!-- Crescent Moon with Craters (Nighttime) -->
+    <div class="celestial-moon relative w-16 h-16 sm:w-20 sm:h-20 hidden">
+      <div class="absolute inset-0 rounded-full bg-indigo-300/10 blur-xl"></div>
+      <svg class="w-full h-full drop-shadow-[0_0_20px_rgba(224,231,255,0.4)]" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="moonGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f8fafc" />
+            <stop offset="70%" stop-color="#e2e8f0" />
+            <stop offset="100%" stop-color="#cbd5e1" />
+          </linearGradient>
+        </defs>
+        <path d="M50 10 A40 40 0 1 0 90 50 A30 30 0 1 1 50 10 Z" fill="url(#moonGlow)"/>
+        <!-- Moon texture / subtle craters -->
+        <circle cx="36" cy="40" r="4" fill="#94a3b8" opacity="0.3"/>
+        <circle cx="48" cy="62" r="6" fill="#94a3b8" opacity="0.25"/>
+        <circle cx="28" cy="56" r="3" fill="#94a3b8" opacity="0.2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Twinkling Stars Layer (Active in Night Mode) -->
+  <div id="stars-layer" class="absolute inset-0 pointer-events-none z-0 overflow-hidden hidden">
+    {Array.from({ length: 45 }).map((_, i) => (
       <div 
-        class="rain-drop absolute top-[-50px] w-[2px] h-12 bg-gradient-to-b from-transparent to-sky-400 rounded-full"
-        style={`left: ${drop.left}%; animation-delay: ${drop.delay}s; animation-duration: ${drop.duration}s;`}
+        class="star-twinkle absolute rounded-full bg-white"
+        style={`
+          width: ${1 + (i % 3)}px; 
+          height: ${1 + (i % 3)}px; 
+          top: ${(i * 2.2) % 75}%; 
+          left: ${(i * 3.7) % 98}%; 
+          animation-delay: ${(i * 0.25) % 3}s; 
+          animation-duration: ${1.5 + (i % 3)}s;
+        `}
       ></div>
     ))}
   </div>
 
-  <!-- Tall River Animation (3 Layers) -->
-  <div class="absolute bottom-0 left-0 w-full h-[250px] pointer-events-none z-0">
-    <div class="absolute bottom-0 w-full h-[150px] bg-gradient-to-t from-sky-100 to-transparent"></div>
+  <!-- Dynamic Seasonal Particles (Rain / Snow / Heat Embers) -->
+  <div id="particles-container" class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+    {particles.map(p => (
+      <div 
+        class="dynamic-particle absolute"
+        style={`left: ${p.left}%; animation-delay: ${p.delay}s; animation-duration: ${p.duration}s;`}
+      ></div>
+    ))}
+  </div>
+
+  <!-- Tall River / Dune / Snow Drift Flow Animation -->
+  <div class="absolute bottom-0 left-0 w-full h-[220px] pointer-events-none z-0">
+    <div class="waves-fade-top absolute bottom-0 w-full h-[120px] transition-colors duration-700"></div>
     
     <!-- Flowing Wave 1 (Back) -->
-    <svg class="absolute bottom-0 w-[200%] h-[200px] river-flow-1 opacity-40" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#e0f2fe" d="M0,50 Q250,100 500,50 T1000,50 T1500,50 T2000,50 V100 H0 Z" />
+    <svg class="absolute bottom-0 w-[200%] h-[180px] river-flow-1 wave-layer-1 transition-colors duration-700" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave-path-1" d="M0,50 Q250,100 500,50 T1000,50 T1500,50 T2000,50 V100 H0 Z" />
     </svg>
     
     <!-- Flowing Wave 2 (Middle) -->
-    <svg class="absolute bottom-0 w-[200%] h-[150px] river-flow-2 opacity-60" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#bae6fd" d="M0,70 Q250,20 500,70 T1000,70 T1500,70 T2000,70 V100 H0 Z" />
+    <svg class="absolute bottom-0 w-[200%] h-[130px] river-flow-2 wave-layer-2 transition-colors duration-700" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave-path-2" d="M0,70 Q250,20 500,70 T1000,70 T1500,70 T2000,70 V100 H0 Z" />
     </svg>
 
     <!-- Flowing Wave 3 (Front) -->
-    <svg class="absolute bottom-0 w-[200%] h-[100px] river-flow-3 opacity-80" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#7dd3fc" d="M0,40 Q250,90 500,40 T1000,40 T1500,40 T2000,40 V100 H0 Z" />
+    <svg class="absolute bottom-0 w-[200%] h-[80px] river-flow-3 wave-layer-3 transition-colors duration-700" viewBox="0 0 2000 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="wave-path-3" d="M0,40 Q250,90 500,40 T1000,40 T1500,40 T2000,40 V100 H0 Z" />
     </svg>
   </div>
 
-  <!-- Footer Content -->
-  <div class="relative z-10 max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
-    <div class="flex flex-col md:flex-row items-center gap-4 md:gap-8">
-      <p class="text-sm text-gray-500 font-medium tracking-wide">
-        &copy; {currentYear} UTKARSH KARALE
-      </p>
-      <a href="mailto:karaleutkarsh3696@gmail.com" class="text-sm text-gray-500 hover:text-black font-medium tracking-wide transition-colors">
-        karaleutkarsh3696@gmail.com
-      </a>
-      <span class="text-xs text-gray-400">Last updated: Aug 16, 2026</span>
-    </div>
+  <!-- Footer Content Container -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6">
     
-    <div class="flex gap-6">
-      <a href="https://github.com/UtkarshKarale" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-black transition-colors">
-        <span class="sr-only">GitHub</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-      </a>
-      <a href="#" title="no want to share" onclick="event.preventDefault()" class="text-gray-400 hover:text-red-500 transition-colors cursor-not-allowed">
-        <span class="sr-only">Twitter</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/utkarshkarale" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-black transition-colors">
-        <span class="sr-only">LinkedIn</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-      </a>
+    <!-- Primary Brand & Summary Banner -->
+    <div class="pb-12 border-b border-inherit/20 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+      <div class="max-w-xl">
+        <a href="/" class="text-2xl font-black tracking-tight inline-flex items-center gap-2 footer-brand-heading">
+          Utkarsh Karale
+          <span id="season-badge" class="inline-flex items-center text-[11px] font-semibold tracking-wide uppercase px-2.5 py-0.5 rounded-full border transition-all duration-500">
+            <!-- Populated via script: e.g. Monsoon Rain • Night -->
+          </span>
+        </a>
+        <p class="mt-2 text-sm footer-subtext leading-relaxed">
+          Full-Stack Software Engineer & AI Builder. Creating privacy-first, local-first consumer products, high-throughput developer tools, and scalable web architectures.
+        </p>
+      </div>
+
+      <!-- Quick Contact & Social Handles -->
+      <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+        <a 
+          href="https://github.com/UtkarshKarale" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="footer-pill-btn inline-flex items-center gap-2 text-sm font-semibold transition-colors px-3.5 py-2 rounded-xl border shadow-2xs"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/utkarshkarale" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="footer-pill-btn inline-flex items-center gap-2 text-sm font-semibold transition-colors px-3.5 py-2 rounded-xl border shadow-2xs"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a 
+          href="mailto:karaleutkarsh3696@gmail.com" 
+          class="footer-cta-btn inline-flex items-center gap-2 text-sm font-semibold transition-colors px-3.5 py-2 rounded-xl border shadow-2xs"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>Get in Touch</span>
+        </a>
+      </div>
     </div>
+
+    <!-- Structured 4-Column Directory Grid -->
+    <div class="py-12 grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12">
+      {navSections.map(section => (
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider mb-4 flex items-center gap-2 footer-col-title">
+            <span class="w-1.5 h-1.5 rounded-full footer-dot"></span>
+            {section.title}
+          </h3>
+          <ul class="space-y-2.5">
+            {section.links.map(item => (
+              <li>
+                <a 
+                  href={item.href}
+                  class="text-xs sm:text-sm footer-link transition-colors block leading-snug font-medium"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Metadata Bar: Copyright, Verification, Sitemap & Bot Directives -->
+    <div class="pt-8 border-t border-inherit/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs footer-subtext">
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <p class="font-medium tracking-wide">
+          &copy; {currentYear} UTKARSH KARALE. All rights reserved.
+        </p>
+        <span class="hidden sm:inline opacity-40">|</span>
+        <a href="mailto:karaleutkarsh3696@gmail.com" class="hover:underline transition-colors">
+          karaleutkarsh3696@gmail.com
+        </a>
+        <span class="hidden sm:inline opacity-40">|</span>
+        <span id="footer-live-clock" class="font-mono text-[11px] opacity-75"></span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="/sitemap-index.xml" class="inline-flex items-center gap-1.5 font-semibold transition-colors underline-offset-4 hover:underline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Sitemap
+        </a>
+        <span class="opacity-40">&bull;</span>
+        <a href="/robots.txt" class="inline-flex items-center gap-1.5 font-semibold transition-colors underline-offset-4 hover:underline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+          Robots.txt
+        </a>
+        <span class="opacity-40">&bull;</span>
+        <a href="/llms.txt" class="inline-flex items-center gap-1.5 font-semibold transition-colors underline-offset-4 hover:underline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          LLMs.txt
+        </a>
+      </div>
+    </div>
+
   </div>
 </footer>
 
+<script is:inline>
+  (function initDynamicFooter() {
+    const footer = document.getElementById('dynamic-seasonal-footer');
+    const badge = document.getElementById('season-badge');
+    const celestial = document.getElementById('celestial-body');
+    const starsLayer = document.getElementById('stars-layer');
+    const clockEl = document.getElementById('footer-live-clock');
+    if (!footer) return;
+
+    const now = new Date();
+    const month = now.getMonth(); // 0 = Jan ... 11 = Dec
+    const hours = now.getHours();
+
+    // Determine Day vs Night
+    // Night is roughly 7 PM (19) to 5:59 AM (5)
+    const isNight = hours >= 19 || hours < 6;
+
+    // Determine Season
+    // Winter: Nov (10), Dec (11), Jan (0), Feb (1)
+    // Summer: Mar (2), Apr (3), May (4)
+    // Monsoon / Rainy: Jun (5), Jul (6), Aug (7), Sep (8), Oct (9)
+    let season = 'monsoon';
+    let seasonLabel = 'Monsoon Rain';
+    if (month >= 2 && month <= 4) {
+      season = 'summer';
+      seasonLabel = 'Summer Breeze';
+    } else if (month >= 10 || month <= 1) {
+      season = 'winter';
+      seasonLabel = 'Winter Chill';
+    }
+
+    const timeLabel = isNight ? 'Night' : 'Day';
+    const themeClass = `theme-${isNight ? 'night' : 'day'}-${season}`;
+
+    // Apply class to footer container
+    footer.className = `relative mt-32 overflow-hidden pt-28 pb-12 transition-all duration-700 ${themeClass}`;
+
+    // Update Celestial visuals (Sun vs Moon)
+    if (celestial) {
+      celestial.style.opacity = '1';
+      const sun = celestial.querySelector('.celestial-sun');
+      const moon = celestial.querySelector('.celestial-moon');
+      if (isNight) {
+        if (sun) sun.classList.add('hidden');
+        if (moon) moon.classList.remove('hidden');
+        if (starsLayer) starsLayer.classList.remove('hidden');
+      } else {
+        if (sun) sun.classList.remove('hidden');
+        if (moon) moon.classList.add('hidden');
+        if (starsLayer) starsLayer.classList.add('hidden');
+      }
+    }
+
+    // Update Badge text & styling
+    if (badge) {
+      badge.textContent = `${seasonLabel} • ${timeLabel}`;
+    }
+
+    // Live formatted clock
+    if (clockEl) {
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      clockEl.textContent = `Local Time: ${timeStr} • ${seasonLabel}`;
+    }
+  })();
+</script>
+
 <style>
-  /* Rain falling down */
-  .rain-drop {
-    animation: fall linear infinite;
-  }
-  @keyframes fall {
-    0% { transform: translateY(-50px); opacity: 0; }
-    10% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translateY(400px); opacity: 0; }
+  /* ============================================================
+     1. BASE PARTICLE ANIMATIONS (Rain, Snow, Heat)
+     ============================================================ */
+  
+  /* Fall animation for Rain & Snow */
+  @keyframes particleFall {
+    0% { transform: translateY(-40px); opacity: 0; }
+    15% { opacity: 0.9; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(420px); opacity: 0; }
   }
 
-  /* River flowing sideways */
-  .river-flow-1 { animation: flow 20s linear infinite; }
-  .river-flow-2 { animation: flow 15s linear infinite reverse; }
-  .river-flow-3 { animation: flow 10s linear infinite; }
+  /* Float animation for Heat shimmer / Embers */
+  @keyframes heatRise {
+    0% { transform: translateY(350px) scale(0.6); opacity: 0; }
+    25% { opacity: 0.6; }
+    75% { opacity: 0.8; transform: translateY(100px) scale(1.1) translateX(8px); }
+    100% { transform: translateY(-40px) scale(0.4) translateX(-8px); opacity: 0; }
+  }
 
-  @keyframes flow {
+  /* Star twinkle */
+  @keyframes starPulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+  .star-twinkle {
+    animation: starPulse infinite ease-in-out;
+  }
+
+  .animate-spin-slow {
+    animation: spinRays 35s linear infinite;
+  }
+  @keyframes spinRays {
+    100% { transform: rotate(360deg); }
+  }
+
+  /* River wave flow animations */
+  .river-flow-1 { animation: waveFlow 22s linear infinite; }
+  .river-flow-2 { animation: waveFlow 16s linear infinite reverse; }
+  .river-flow-3 { animation: waveFlow 11s linear infinite; }
+  @keyframes waveFlow {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* -50% shifts it exactly by half the width of the 200% SVG, looping the seamless waves */
+    100% { transform: translateX(-50%); }
   }
+
+  /* ============================================================
+     2. THEME DEFINITIONS (Combinations of Day/Night x Season)
+     ============================================================ */
+
+  /* ---------------- MONSOON (DAY) ---------------- */
+  .theme-day-monsoon {
+    background-color: #f8fafc;
+    color: #0f172a;
+    border-color: #e2e8f0;
+  }
+  .theme-day-monsoon .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(186, 230, 253, 0.35), transparent 70%);
+  }
+  .theme-day-monsoon .dynamic-particle {
+    width: 2px;
+    height: 14px;
+    background: linear-gradient(to bottom, transparent, #38bdf8);
+    border-radius: 999px;
+    animation: particleFall linear infinite;
+  }
+  .theme-day-monsoon .waves-fade-top { background: linear-gradient(to top, rgba(224, 242, 254, 0.7), transparent); }
+  .theme-day-monsoon .wave-layer-1 { opacity: 0.35; }
+  .theme-day-monsoon .wave-path-1 { fill: #e0f2fe; }
+  .theme-day-monsoon .wave-layer-2 { opacity: 0.5; }
+  .theme-day-monsoon .wave-path-2 { fill: #bae6fd; }
+  .theme-day-monsoon .wave-layer-3 { opacity: 0.7; }
+  .theme-day-monsoon .wave-path-3 { fill: #7dd3fc; }
+  .theme-day-monsoon #season-badge {
+    background: #e0f2fe; color: #0369a1; border-color: #bae6fd;
+  }
+  .theme-day-monsoon .footer-brand-heading { color: #0f172a; }
+  .theme-day-monsoon .footer-subtext { color: #475569; }
+  .theme-day-monsoon .footer-pill-btn { background: #ffffff; border-color: #e2e8f0; color: #1e293b; }
+  .theme-day-monsoon .footer-pill-btn:hover { border-color: #94a3b8; color: #000; }
+  .theme-day-monsoon .footer-cta-btn { background: #f0f9ff; border-color: #bae6fd; color: #0284c7; }
+  .theme-day-monsoon .footer-cta-btn:hover { background: #e0f2fe; color: #0369a1; }
+  .theme-day-monsoon .footer-col-title { color: #0f172a; }
+  .theme-day-monsoon .footer-dot { background-color: #0ea5e9; }
+  .theme-day-monsoon .footer-link { color: #64748b; }
+  .theme-day-monsoon .footer-link:hover { color: #0f172a; }
+
+  /* ---------------- MONSOON (NIGHT) ---------------- */
+  .theme-night-monsoon {
+    background-color: #0b132b;
+    color: #e2e8f0;
+    border-color: #1e293b;
+  }
+  .theme-night-monsoon .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(30, 41, 59, 0.7), transparent 70%);
+  }
+  .theme-night-monsoon .dynamic-particle {
+    width: 2px;
+    height: 14px;
+    background: linear-gradient(to bottom, transparent, rgba(56, 189, 248, 0.7));
+    border-radius: 999px;
+    animation: particleFall linear infinite;
+  }
+  .theme-night-monsoon .waves-fade-top { background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent); }
+  .theme-night-monsoon .wave-layer-1 { opacity: 0.3; }
+  .theme-night-monsoon .wave-path-1 { fill: #1e293b; }
+  .theme-night-monsoon .wave-layer-2 { opacity: 0.45; }
+  .theme-night-monsoon .wave-path-2 { fill: #0f2b48; }
+  .theme-night-monsoon .wave-layer-3 { opacity: 0.7; }
+  .theme-night-monsoon .wave-path-3 { fill: #03446a; }
+  .theme-night-monsoon #season-badge {
+    background: rgba(14, 165, 233, 0.15); color: #7dd3fc; border-color: rgba(56, 189, 248, 0.3);
+  }
+  .theme-night-monsoon .footer-brand-heading { color: #f8fafc; }
+  .theme-night-monsoon .footer-subtext { color: #94a3b8; }
+  .theme-night-monsoon .footer-pill-btn { background: #1e293b; border-color: #334155; color: #f1f5f9; }
+  .theme-night-monsoon .footer-pill-btn:hover { border-color: #64748b; color: #ffffff; }
+  .theme-night-monsoon .footer-cta-btn { background: rgba(14, 165, 233, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8; }
+  .theme-night-monsoon .footer-cta-btn:hover { background: rgba(14, 165, 233, 0.25); color: #7dd3fc; }
+  .theme-night-monsoon .footer-col-title { color: #f8fafc; }
+  .theme-night-monsoon .footer-dot { background-color: #38bdf8; }
+  .theme-night-monsoon .footer-link { color: #94a3b8; }
+  .theme-night-monsoon .footer-link:hover { color: #ffffff; }
+
+  /* ---------------- SUMMER (DAY) ---------------- */
+  .theme-day-summer {
+    background-color: #fffbeb;
+    color: #451a03;
+    border-color: #fde68a;
+  }
+  .theme-day-summer .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(254, 240, 138, 0.4), transparent 70%);
+  }
+  .theme-day-summer .dynamic-particle {
+    width: 3px;
+    height: 3px;
+    background: #f59e0b;
+    border-radius: 999px;
+    box-shadow: 0 0 6px rgba(245, 158, 11, 0.8);
+    animation: heatRise ease-in-out infinite;
+  }
+  .theme-day-summer .waves-fade-top { background: linear-gradient(to top, rgba(254, 243, 199, 0.7), transparent); }
+  .theme-day-summer .wave-layer-1 { opacity: 0.35; }
+  .theme-day-summer .wave-path-1 { fill: #fef3c7; }
+  .theme-day-summer .wave-layer-2 { opacity: 0.5; }
+  .theme-day-summer .wave-path-2 { fill: #fde68a; }
+  .theme-day-summer .wave-layer-3 { opacity: 0.7; }
+  .theme-day-summer .wave-path-3 { fill: #fcd34d; }
+  .theme-day-summer #season-badge {
+    background: #fef3c7; color: #b45309; border-color: #fde68a;
+  }
+  .theme-day-summer .footer-brand-heading { color: #451a03; }
+  .theme-day-summer .footer-subtext { color: #78350f; }
+  .theme-day-summer .footer-pill-btn { background: #ffffff; border-color: #fde68a; color: #78350f; }
+  .theme-day-summer .footer-pill-btn:hover { border-color: #f59e0b; color: #451a03; }
+  .theme-day-summer .footer-cta-btn { background: #fff7ed; border-color: #fdba74; color: #ea580c; }
+  .theme-day-summer .footer-cta-btn:hover { background: #ffedd5; color: #c2410c; }
+  .theme-day-summer .footer-col-title { color: #451a03; }
+  .theme-day-summer .footer-dot { background-color: #f59e0b; }
+  .theme-day-summer .footer-link { color: #92400e; }
+  .theme-day-summer .footer-link:hover { color: #451a03; }
+
+  /* ---------------- SUMMER (NIGHT - Warm Desert Night) ---------------- */
+  .theme-night-summer {
+    background-color: #1c1326;
+    color: #f5d0fe;
+    border-color: #3b1d4c;
+  }
+  .theme-night-summer .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.2), transparent 70%);
+  }
+  .theme-night-summer .dynamic-particle {
+    width: 2.5px;
+    height: 2.5px;
+    background: #e879f9;
+    border-radius: 999px;
+    box-shadow: 0 0 6px #d946ef;
+    animation: heatRise ease-in-out infinite;
+  }
+  .theme-night-summer .waves-fade-top { background: linear-gradient(to top, rgba(46, 16, 68, 0.7), transparent); }
+  .theme-night-summer .wave-layer-1 { opacity: 0.3; }
+  .theme-night-summer .wave-path-1 { fill: #38124f; }
+  .theme-night-summer .wave-layer-2 { opacity: 0.5; }
+  .theme-night-summer .wave-path-2 { fill: #4c1d6b; }
+  .theme-night-summer .wave-layer-3 { opacity: 0.7; }
+  .theme-night-summer .wave-path-3 { fill: #6b21a8; }
+  .theme-night-summer #season-badge {
+    background: rgba(217, 70, 239, 0.15); color: #f0abfc; border-color: rgba(217, 70, 239, 0.3);
+  }
+  .theme-night-summer .footer-brand-heading { color: #faf5ff; }
+  .theme-night-summer .footer-subtext { color: #d8b4fe; }
+  .theme-night-summer .footer-pill-btn { background: #2e1044; border-color: #581c87; color: #f5d0fe; }
+  .theme-night-summer .footer-pill-btn:hover { border-color: #a855f7; color: #ffffff; }
+  .theme-night-summer .footer-cta-btn { background: rgba(217, 70, 239, 0.15); border-color: rgba(217, 70, 239, 0.3); color: #f0abfc; }
+  .theme-night-summer .footer-cta-btn:hover { background: rgba(217, 70, 239, 0.25); color: #ffffff; }
+  .theme-night-summer .footer-col-title { color: #faf5ff; }
+  .theme-night-summer .footer-dot { background-color: #d946ef; }
+  .theme-night-summer .footer-link { color: #d8b4fe; }
+  .theme-night-summer .footer-link:hover { color: #ffffff; }
+
+  /* ---------------- WINTER (DAY - Crisp Snow Frost) ---------------- */
+  .theme-day-winter {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    border-color: #cbd5e1;
+  }
+  .theme-day-winter .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(226, 232, 240, 0.6), transparent 70%);
+  }
+  .theme-day-winter .dynamic-particle {
+    width: 5px;
+    height: 5px;
+    background: #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.9);
+    animation: particleFall linear infinite;
+  }
+  .theme-day-winter .waves-fade-top { background: linear-gradient(to top, rgba(241, 245, 249, 0.8), transparent); }
+  .theme-day-winter .wave-layer-1 { opacity: 0.4; }
+  .theme-day-winter .wave-path-1 { fill: #e2e8f0; }
+  .theme-day-winter .wave-layer-2 { opacity: 0.6; }
+  .theme-day-winter .wave-path-2 { fill: #cbd5e1; }
+  .theme-day-winter .wave-layer-3 { opacity: 0.8; }
+  .theme-day-winter .wave-path-3 { fill: #94a3b8; }
+  .theme-day-winter #season-badge {
+    background: #e2e8f0; color: #334155; border-color: #cbd5e1;
+  }
+  .theme-day-winter .footer-brand-heading { color: #0f172a; }
+  .theme-day-winter .footer-subtext { color: #475569; }
+  .theme-day-winter .footer-pill-btn { background: #ffffff; border-color: #cbd5e1; color: #1e293b; }
+  .theme-day-winter .footer-pill-btn:hover { border-color: #64748b; color: #000; }
+  .theme-day-winter .footer-cta-btn { background: #f8fafc; border-color: #cbd5e1; color: #2563eb; }
+  .theme-day-winter .footer-cta-btn:hover { background: #e2e8f0; color: #1d4ed8; }
+  .theme-day-winter .footer-col-title { color: #0f172a; }
+  .theme-day-winter .footer-dot { background-color: #64748b; }
+  .theme-day-winter .footer-link { color: #475569; }
+  .theme-day-winter .footer-link:hover { color: #0f172a; }
+
+  /* ---------------- WINTER (NIGHT - Deep Arctic Aurora / Clear Frost Night) ---------------- */
+  .theme-night-winter {
+    background-color: #030712;
+    color: #e2e8f0;
+    border-color: #1f2937;
+  }
+  .theme-night-winter .sky-ambient-layer {
+    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.15), rgba(129, 140, 248, 0.1) 40%, transparent 70%);
+  }
+  .theme-night-winter .dynamic-particle {
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 999px;
+    box-shadow: 0 0 7px rgba(255, 255, 255, 0.95);
+    animation: particleFall linear infinite;
+  }
+  .theme-night-winter .waves-fade-top { background: linear-gradient(to top, rgba(17, 24, 39, 0.8), transparent); }
+  .theme-night-winter .wave-layer-1 { opacity: 0.3; }
+  .theme-night-winter .wave-path-1 { fill: #111827; }
+  .theme-night-winter .wave-layer-2 { opacity: 0.5; }
+  .theme-night-winter .wave-path-2 { fill: #1f2937; }
+  .theme-night-winter .wave-layer-3 { opacity: 0.75; }
+  .theme-night-winter .wave-path-3 { fill: #374151; }
+  .theme-night-winter #season-badge {
+    background: rgba(255, 255, 255, 0.1); color: #e2e8f0; border-color: rgba(255, 255, 255, 0.2);
+  }
+  .theme-night-winter .footer-brand-heading { color: #f9fafb; }
+  .theme-night-winter .footer-subtext { color: #9ca3af; }
+  .theme-night-winter .footer-pill-btn { background: #111827; border-color: #374151; color: #f3f4f6; }
+  .theme-night-winter .footer-pill-btn:hover { border-color: #6b7280; color: #ffffff; }
+  .theme-night-winter .footer-cta-btn { background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: #38bdf8; }
+  .theme-night-winter .footer-cta-btn:hover { background: rgba(56, 189, 248, 0.25); color: #7dd3fc; }
+  .theme-night-winter .footer-col-title { color: #f9fafb; }
+  .theme-night-winter .footer-dot { background-color: #9ca3af; }
+  .theme-night-winter .footer-link { color: #9ca3af; }
+  .theme-night-winter .footer-link:hover { color: #ffffff; }
 </style>

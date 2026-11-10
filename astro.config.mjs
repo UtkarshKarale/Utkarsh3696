@@ -9,7 +9,7 @@ export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   outDir: fileURLToPath(new URL('./dist', import.meta.url)),
   cacheDir: fileURLToPath(new URL('./.astro', import.meta.url)),
-  site: 'https://example.com',
+  site: 'https://utkarshkarale.github.io',
   integrations: [
     mdx(),
     tailwind({

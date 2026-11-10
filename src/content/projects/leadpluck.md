@@ -9,9 +9,30 @@ featured: true
 
 # LeadPluck – Local-First Business Contact & Lead Generator
 
-**Landing Page:** [/leadpluck](/leadpluck) &nbsp;|&nbsp; **Privacy Policy:** [/leadpluck/privacy](/leadpluck/privacy)
+**Landing Page:** [/leadpluck](/leadpluck) &nbsp;|&nbsp; **Privacy Policy:** [/leadpluck/privacy](/leadpluck/privacy) &nbsp;|&nbsp; **Category:** Productivity / Lead Generation & Web Scraper
 
-**Category:** Productivity / Lead Generation & Web Scraper
+---
+
+### TL;DR / Quick Answer
+
+> **What is LeadPluck?**  
+> LeadPluck is a local-first Chrome extension that automatically extracts publicly listed contact details (phone numbers, emails, addresses, ratings, and websites) from Google Maps listings and public web pages into formatted CSV lists.
+>
+> - **Who is it for?** Agencies, B2B sales professionals, freelance service providers, and local market researchers.
+> - **How does it protect privacy?** All search indexing and contact parsing executes directly inside your browser session. No scraped data or user browsing behavior is sent to third-party cloud servers.
+> - **Platform:** Browser Extension (Chrome, Edge, Brave) with landing page at [/leadpluck](/leadpluck).
+
+---
+
+### Key Questions & Answers (AEO)
+
+#### Does LeadPluck bypass paywalls or private data?
+No. LeadPluck strictly extracts publicly posted contact data that businesses intentionally publish on their public business profiles and public website contact pages.
+
+#### How does LeadPluck prevent duplicate contacts?
+LeadPluck features an automated duplicate detection algorithm that matches business names, phone numbers, and domains to provide a merge preview before CSV export.
+
+---
 
 ### Project Description
 
