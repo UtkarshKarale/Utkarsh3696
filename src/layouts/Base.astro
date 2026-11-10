@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import CustomCursor from '../components/CustomCursor.astro';
 import PrivacyConsentBanner from '../components/PrivacyConsentBanner.astro';
+import UpdateNotificationBanner from '../components/UpdateNotificationBanner.astro';
 
 interface Props {
   title?: string;
@@ -109,6 +110,7 @@ const structuredData = {
     <div class="fixed inset-0 z-[-1] h-full w-full bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"></div>
     
     <CustomCursor />
+    <UpdateNotificationBanner />
     <main class="flex-grow">
       <slot />
     </main>

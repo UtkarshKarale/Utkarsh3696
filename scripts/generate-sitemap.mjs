@@ -1,8 +1,23 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 
 const site = 'https://utkarshkarale.github.io';
 const today = new Date().toISOString().split('T')[0];
+
+let buildVersion = '';
+try {
+  buildVersion = execSync('git rev-parse --short HEAD', { encoding: 'utf-8' }).trim();
+} catch (e) {
+  buildVersion = Date.now().toString(36);
+}
+if (!buildVersion) buildVersion = Date.now().toString(36);
+
+const versionPayload = JSON.stringify({
+  version: buildVersion,
+  buildTime: new Date().toISOString(),
+  date: today
+}, null, 2);
 
 const pages = [
   // Flagship & Core Landing Pages (Priority 1.0)
@@ -90,12 +105,14 @@ function generateSitemapIndexXml() {
 const publicDir = path.resolve('public');
 fs.writeFileSync(path.join(publicDir, 'sitemap-0.xml'), generateSitemapXml());
 fs.writeFileSync(path.join(publicDir, 'sitemap-index.xml'), generateSitemapIndexXml());
+fs.writeFileSync(path.join(publicDir, 'version.json'), versionPayload);
 
 // Write to dist folder if it exists
 const distDir = path.resolve('dist');
 if (fs.existsSync(distDir)) {
   fs.writeFileSync(path.join(distDir, 'sitemap-0.xml'), generateSitemapXml());
   fs.writeFileSync(path.join(distDir, 'sitemap-index.xml'), generateSitemapIndexXml());
+  fs.writeFileSync(path.join(distDir, 'version.json'), versionPayload);
 }
 
-console.log(`Generated comprehensive sitemap with ${pages.length} prioritized URLs!`);
+console.log(`Generated comprehensive sitemap and version.json (v${buildVersion})!`);

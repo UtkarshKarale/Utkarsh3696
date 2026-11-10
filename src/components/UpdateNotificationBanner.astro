@@ -1,0 +1,133 @@
+---
+import { execSync } from 'node:child_process';
+
+let currentVersion = '';
+try {
+  currentVersion = execSync('git rev-parse --short HEAD', { encoding: 'utf-8' }).trim();
+} catch (e) {
+  currentVersion = 'prod';
+}
+if (!currentVersion) currentVersion = 'prod';
+---
+
+<!-- Floating New Version Update Reload Banner -->
+<div 
+  id="app-update-banner"
+  class="fixed top-5 left-1/2 -translate-x-1/2 z-[99998] max-w-md w-[calc(100%-32px)] bg-gray-950/95 text-white backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-gray-800 transition-all duration-300 opacity-0 -translate-y-6 pointer-events-none"
+  role="alert"
+  aria-live="assertive"
+>
+  <div class="flex items-center justify-between gap-3">
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="p-2 rounded-xl bg-sky-500/10 text-sky-400 shrink-0 border border-sky-500/20">
+        <!-- Lucide Sparkles SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M18 16a2 2 0 0 1-1.4.6l-1.3.4.4-1.3A2 2 0 0 1 18 16z"/></svg>
+      </div>
+      <div class="min-w-0">
+        <p class="text-xs font-bold text-white tracking-tight flex items-center gap-1.5 truncate">
+          <span>New Version Deployed</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800/60 uppercase">Update</span>
+        </p>
+        <p class="text-[11px] text-gray-400 truncate">
+          A new release is available with fresh updates.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button 
+        id="reload-app-btn"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-black font-bold text-xs shadow-md transition-all active:scale-95 cursor-pointer"
+      >
+        <!-- Lucide Refresh SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+        <span>Reload</span>
+      </button>
+
+      <button 
+        id="dismiss-update-btn"
+        class="p-1.5 text-gray-400 hover:text-white rounded-lg transition-colors cursor-pointer"
+        aria-label="Dismiss banner"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ currentVersion }}>
+  (function initVersionCheck() {
+    const banner = document.getElementById('app-update-banner');
+    const reloadBtn = document.getElementById('reload-app-btn');
+    const dismissBtn = document.getElementById('dismiss-update-btn');
+    if (!banner) return;
+
+    // Store the version active in this DOM
+    const initialVersion = currentVersion || 'initial';
+    
+    // Save current version to sessionStorage so tabs know what they started with
+    if (!sessionStorage.getItem('active_app_version')) {
+      sessionStorage.setItem('active_app_version', initialVersion);
+    }
+
+    async function checkForUpdates() {
+      try {
+        // Cache-busting fetch to version.json
+        const res = await fetch(`/version.json?t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+          }
+        });
+
+        if (!res.ok) return;
+        const data = await res.json();
+        const serverVersion = data && data.version;
+
+        if (serverVersion && serverVersion !== initialVersion) {
+          // New deployment detected!
+          showUpdateBanner();
+        }
+      } catch (err) {
+        // Silently skip if offline
+      }
+    }
+
+    function showUpdateBanner() {
+      // Don't show if user dismissed in this session
+      if (sessionStorage.getItem('dismissed_update_banner') === 'true') return;
+      banner.classList.remove('opacity-0', '-translate-y-6', 'pointer-events-none');
+    }
+
+    function hideUpdateBanner() {
+      sessionStorage.setItem('dismissed_update_banner', 'true');
+      banner.classList.add('opacity-0', '-translate-y-6', 'pointer-events-none');
+    }
+
+    if (reloadBtn) {
+      reloadBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('dismissed_update_banner');
+        window.location.reload(true);
+      });
+    }
+
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', hideUpdateBanner);
+    }
+
+    // Check updates:
+    // 1. Initial check after 4 seconds
+    setTimeout(checkForUpdates, 4000);
+
+    // 2. Periodic check every 90 seconds
+    setInterval(checkForUpdates, 90000);
+
+    // 3. When user switches back to this tab (document visibility changes to visible)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        checkForUpdates();
+      }
+    });
+  })();
+</script>
