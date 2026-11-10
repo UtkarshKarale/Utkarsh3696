@@ -383,6 +383,20 @@ const navSections = [
   }
 
   /* Water Waves - Pure Blue Water Spectrum Across All Seasons */
+  .river-flow-1 { 
+    animation: waveFlow 22s linear infinite !important; 
+  }
+  .river-flow-2 { 
+    animation: waveFlow 16s linear infinite reverse !important; 
+  }
+  .river-flow-3 { 
+    animation: waveFlow 11s linear infinite !important; 
+  }
+  @keyframes waveFlow {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
   .waves-fade-top { 
     background: linear-gradient(to top, rgba(224, 242, 254, 0.75), transparent); 
   }
