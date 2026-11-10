@@ -1,5 +1,18 @@
 ---
+import { execSync } from 'node:child_process';
+
 const currentYear = new Date().getFullYear();
+
+// Dynamically compute the last commit/build date during build
+let lastUpdated = '';
+try {
+  lastUpdated = execSync('git log -1 --format=%cd --date=format:"%b %d, %Y"', { encoding: 'utf-8' }).trim();
+} catch (e) {
+  lastUpdated = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date());
+}
+if (!lastUpdated) {
+  lastUpdated = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date());
+}
 
 // Base particle pool generated statically for SSR (reused with CSS styles for rain, snow, or heat embers/shimmer)
 const particles = Array.from({ length: 65 }).map((_, i) => ({
@@ -236,6 +249,11 @@ const navSections = [
         <a href="mailto:karaleutkarsh3696@gmail.com" class="hover:underline transition-colors">
           karaleutkarsh3696@gmail.com
         </a>
+        <span class="hidden sm:inline opacity-40">|</span>
+        <span class="inline-flex items-center gap-1.5 text-inherit opacity-85">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Last updated: <span class="font-semibold">{lastUpdated}</span>
+        </span>
         <span class="hidden sm:inline opacity-40">|</span>
         <span id="footer-live-clock" class="font-mono text-[11px] opacity-75"></span>
       </div>
