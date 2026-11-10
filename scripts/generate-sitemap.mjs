@@ -22,7 +22,8 @@ const versionPayload = JSON.stringify({
 const pages = [
   // Flagship & Core Landing Pages (Priority 1.0)
   { loc: `${site}/`, priority: '1.0', changefreq: 'weekly', lastmod: today },
-  { loc: `${site}/projects/flowrupee`, priority: '1.0', changefreq: 'weekly', lastmod: today },
+  { loc: `${site}/flowrupee`, priority: '1.0', changefreq: 'weekly', lastmod: today },
+  { loc: `${site}/projects/flowrupee`, priority: '0.9', changefreq: 'weekly', lastmod: today },
   { loc: `${site}/projects/statusgrid`, priority: '1.0', changefreq: 'weekly', lastmod: today },
   { loc: `${site}/leadpluck`, priority: '1.0', changefreq: 'weekly', lastmod: today },
   { loc: `${site}/webstickly`, priority: '1.0', changefreq: 'weekly', lastmod: today },
