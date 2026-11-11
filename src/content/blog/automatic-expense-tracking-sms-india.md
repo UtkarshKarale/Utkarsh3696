@@ -6,6 +6,11 @@ coverImage: "/flowrupee-icon.png"
 tags: ["Finance Tracking App", "Free Finance App", "SMS Expense Tracker", "Personal Finance India", "UPI Expense Tracker", "FlowRupee", "Offline Budgeting", "Privacy"]
 featured: false
 draft: false
+faqs:
+  - q: "How does automatic SMS expense tracking work in India?"
+    a: "An expense app monitors incoming bank SMS alerts (e.g. from HDFC, SBI, ICICI), extracts the debit amount, vendor name, and payment mode via regex or NLP, and automatically creates an expense record."
+  - q: "Is it safe to give an expense tracking app full SMS permissions?"
+    a: "Only if the app processes SMS data 100% locally on-device. Many cloud-based expense apps upload your entire SMS inbox to external servers to build marketing profiles or offer loans. Always choose local-first apps that do not harvest data."
 ---
 
 # Automatic Expense Tracking via SMS in India: Convenience vs Privacy

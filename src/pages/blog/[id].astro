@@ -28,53 +28,83 @@ const readingTime = Math.ceil((post.body?.split(' ').length || 200) / 200) + ' m
 const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://utkarshkarale.github.io';
 const canonicalPostUrl = `${siteUrl}/blog/${post.id}`;
 
-// Structured Data for Google Rich Snippets (BreadcrumbList + BlogPosting)
+// Structured Data for Google Rich Snippets (BreadcrumbList + BlogPosting + FAQPage + HowTo)
+const graphList: any[] = [
+  {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": `${siteUrl}/blog`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.data.title,
+        "item": canonicalPostUrl
+      }
+    ]
+  },
+  {
+    "@type": "BlogPosting",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "url": canonicalPostUrl,
+    "datePublished": new Date(post.data.publishedAt).toISOString(),
+    "dateModified": new Date(post.data.publishedAt).toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": "Utkarsh Karale",
+      "url": `${siteUrl}/`
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Utkarsh Karale",
+      "url": `${siteUrl}/`
+    },
+    "keywords": post.data.tags.join(', ')
+  }
+];
+
+if (post.data.faqs && post.data.faqs.length > 0) {
+  graphList.push({
+    "@type": "FAQPage",
+    "mainEntity": post.data.faqs.map((f: { q: string; a: string }) => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  });
+}
+
+if (post.data.howTo) {
+  graphList.push({
+    "@type": "HowTo",
+    "name": post.data.howTo.name,
+    "description": post.data.howTo.description,
+    "step": post.data.howTo.steps.map((s: { name: string; text: string }, idx: number) => ({
+      "@type": "HowToStep",
+      "position": idx + 1,
+      "name": s.name,
+      "text": s.text
+    }))
+  });
+}
+
 const articleStructuredData = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": `${siteUrl}/`
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Blog",
-          "item": `${siteUrl}/blog`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": post.data.title,
-          "item": canonicalPostUrl
-        }
-      ]
-    },
-    {
-      "@type": "BlogPosting",
-      "headline": post.data.title,
-      "description": post.data.description,
-      "url": canonicalPostUrl,
-      "datePublished": new Date(post.data.publishedAt).toISOString(),
-      "dateModified": new Date(post.data.publishedAt).toISOString(),
-      "author": {
-        "@type": "Person",
-        "name": "Utkarsh Karale",
-        "url": `${siteUrl}/`
-      },
-      "publisher": {
-        "@type": "Person",
-        "name": "Utkarsh Karale",
-        "url": `${siteUrl}/`
-      },
-      "keywords": post.data.tags.join(', ')
-    }
-  ]
+  "@graph": graphList
 };
 ---
 

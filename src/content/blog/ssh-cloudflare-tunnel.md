@@ -4,6 +4,18 @@ description: "How to access your Ubuntu machine remotely without a static IP usi
 publishedAt: "2024-05-15"
 coverImage: "https://miro.medium.com/v2/resize:fit:720/format:webp/1*tLYbl-KnZshas1YC7a-10g.png"
 tags: ["Ubuntu", "SSH", "Cloudflare", "Networking", "Linux"]
+howTo:
+  name: "How to Securely SSH into Ubuntu without Static IP using Cloudflare Tunnel"
+  description: "Step-by-step instructions to configure OpenSSH and Cloudflare Tunnels for secure remote access without port forwarding or a static IP."
+  steps:
+    - name: "Install OpenSSH Server"
+      text: "Run sudo apt update && sudo apt install openssh-server -y, then enable and start the service with sudo systemctl enable --now ssh."
+    - name: "Check SSH Status"
+      text: "Verify the daemon is listening by executing sudo systemctl status ssh and test connecting locally via ssh username@localhost."
+    - name: "Configure Cloudflare Tunnel"
+      text: "Install cloudflared on Ubuntu, authenticate your Cloudflare account, and create a tunnel forwarding internet traffic securely to localhost:22."
+    - name: "Configure Authorized SSH Keys"
+      text: "Generate an SSH key pair with ssh-keygen, transfer your public key to ~/.ssh/authorized_keys, and connect remotely through the Cloudflare proxy."
 ---
 Sometimes you want to access your Ubuntu machine remotely, but you don’t have a static IP. That was my case recently. I wanted to set up a secure SSH tunnel, and I managed to do it using OpenSSH along with Cloudflare Tunnel. Here’s how I did it.
 

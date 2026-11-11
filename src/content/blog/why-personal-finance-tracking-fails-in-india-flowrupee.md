@@ -6,6 +6,13 @@ coverImage: "/flowrupee-icon.png"
 tags: ["Finance Tracking App", "Free App", "Best Expense Tracker India", "UPI Money Tracker", "FlowRupee", "Split Bills App", "Offline Expense Manager", "Personal Finance"]
 featured: true
 draft: false
+faqs:
+  - q: "Why do traditional personal finance apps fail in India?"
+    a: "Traditional Indian finance apps require too many manual form fields for small, rapid UPI payments, lack integrated roommate bill splitting, and often harvest private SMS inboxes to push unwanted loans."
+  - q: "How does FlowRupee solve daily expense tracking in India?"
+    a: "FlowRupee provides sub-3-second transaction logging, integrated group debt minimization for flatmates, 100% offline-first local SQLite security, and zero ads or intrusive SMS scraping."
+  - q: "Can I track group expenses with roommates in FlowRupee?"
+    a: "Yes. FlowRupee has built-in roommate and trip bill splitting with an automated debt-reduction algorithm that calculates the fewest number of transactions needed to settle up."
 ---
 
 # Why Modern Personal Finance Tracking Still Fails in India (And How FlowRupee Solves It)
