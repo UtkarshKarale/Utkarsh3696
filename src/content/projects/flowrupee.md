@@ -1,8 +1,8 @@
 ---
-title: "FlowRupee – Free & Offline Personal Finance Tracking App for India"
-description: "FlowRupee is a 100% offline, privacy-first free personal finance and automated SMS expense tracking app for Android in India. Zero bank logins, zero cloud storage, instant UPI logging, and roommate bill splitting."
+title: "FlowRupee – Free & Privacy-First Personal Finance App with Safe Sync"
+description: "FlowRupee is a privacy-first free personal finance and expense tracking app for Android in India. Zero bank logins, lightning-fast in-memory performance, secure sync so your data survives, instant UPI logging, and roommate bill splitting."
 publishedAt: "2026-11-08"
-technologies: ["Android", "Finance Tracking App", "Offline-First", "SQLite", "Biometrics", "UPI Expense Tracker", "Free App"]
+technologies: ["Android", "Finance Tracking App", "In-Memory SQLite", "Data Sync & Backup", "Biometrics", "UPI Expense Tracker", "Free App"]
 liveUrl: "https://play.google.com/store/apps/details?id=online.jiapp.flowrupee"
 featured: true
 ---
