@@ -6,7 +6,7 @@ import FlowRupeeLayout from '../../../layouts/FlowRupeeLayout.astro';
   title="Friend Requests — FlowRupee"
   description="Connect with friends and split bills effortlessly on FlowRupee."
 >
-  <section class="relative min-h-[80vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+  <section class="relative min-h-[85vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
     <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[300px] bg-emerald-500/15 blur-[130px] rounded-full pointer-events-none"></div>
 
     <div class="max-w-md w-full mx-auto px-6 relative z-10 text-center">
@@ -18,13 +18,13 @@ import FlowRupeeLayout from '../../../layouts/FlowRupeeLayout.astro';
 
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-4">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>Friends &amp; Requests</span>
+        <span id="status-text">Connecting to FlowRupee...</span>
       </div>
 
       <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
         Friend Requests
       </h1>
-      <p class="text-sm text-zinc-300 mb-8">
+      <p id="helper-text" class="text-sm text-zinc-300 mb-8">
         Accept friend requests or invite friends to track shared expenses together.
       </p>
 
@@ -51,9 +51,41 @@ import FlowRupeeLayout from '../../../layouts/FlowRupeeLayout.astro';
 
   <script is:inline>
     (function() {
-      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href = 'flowrupee://friends/requests';
+      var playStoreUrl = 'https://play.google.com/store/apps/details?id=online.jiapp.flowrupee';
+      var schemeTarget = 'friends/requests';
+      var schemeUrl = 'flowrupee://' + schemeTarget;
+      var intentUrl = 'intent://' + schemeTarget + '#Intent;scheme=flowrupee;package=online.jiapp.flowrupee;S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
+
+      var statusText = document.getElementById('status-text');
+      var userAgent = navigator.userAgent || '';
+      var isAndroid = /Android/i.test(userAgent);
+      var isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+
+      if (!isAndroid && !isIOS) return;
+
+      if (isAndroid) {
+        window.location.href = intentUrl;
+        var timer = setTimeout(function() {
+          if (!document.hidden) {
+            if (statusText) statusText.textContent = 'Redirecting to Google Play...';
+            window.location.href = playStoreUrl;
+          }
+        }, 2200);
+
+        var cancel = function() { clearTimeout(timer); };
+        window.addEventListener('visibilitychange', function() { if (document.hidden) cancel(); });
+        window.addEventListener('pagehide', cancel);
+        window.addEventListener('blur', cancel);
+      } else {
+        window.location.href = schemeUrl;
+        var timer = setTimeout(function() {
+          if (!document.hidden) window.location.href = playStoreUrl;
+        }, 1800);
+
+        var cancel = function() { clearTimeout(timer); };
+        window.addEventListener('visibilitychange', function() { if (document.hidden) cancel(); });
+        window.addEventListener('pagehide', cancel);
+        window.addEventListener('blur', cancel);
       }
     })();
   </script>

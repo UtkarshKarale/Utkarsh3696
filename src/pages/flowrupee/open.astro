@@ -4,9 +4,9 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
 
 <FlowRupeeLayout 
   title="Opening FlowRupee..."
-  description="Deep link redirect into FlowRupee Android personal finance & bill split app."
+  description="Smart deep link: opens FlowRupee app if installed, or redirects to Google Play Store."
 >
-  <section class="relative min-h-[80vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+  <section class="relative min-h-[85vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
     <!-- Ambient Green Glows -->
     <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[300px] bg-emerald-500/15 blur-[130px] rounded-full pointer-events-none"></div>
 
@@ -23,17 +23,17 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
       </div>
 
       <!-- Status Indicator -->
-      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-4">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-xs font-semibold mb-4">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span id="status-text">Redirecting to FlowRupee...</span>
+        <span id="status-text">Detecting FlowRupee App...</span>
       </div>
 
       <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
         Opening in FlowRupee
       </h1>
 
-      <p class="text-sm text-zinc-300 mb-8 leading-relaxed">
-        If FlowRupee didn't open automatically on your phone, tap the button below to launch the app directly.
+      <p id="helper-text" class="text-sm text-zinc-300 mb-8 leading-relaxed">
+        Connecting to FlowRupee. If you haven't installed the app yet, we'll take you to the Google Play Store automatically.
       </p>
 
       <!-- Primary Action Buttons -->
@@ -48,10 +48,11 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
-          Open in FlowRupee App
+          Open FlowRupee App
         </a>
 
         <a 
+          id="play-store-btn"
           href="https://play.google.com/store/apps/details?id=online.jiapp.flowrupee"
           target="_blank"
           rel="noopener noreferrer"
@@ -60,7 +61,7 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M3.609 1.814L13.793 12 3.61 22.186c-.302-.275-.485-.68-.485-1.144V2.958c0-.464.183-.869.484-1.144zm11.306 11.308l2.586 2.586-12.39 7.08 9.804-9.666zm2.586-2.244L21.4 12.8c.8.457.8 1.2 0 1.657l-3.899 1.92-2.316-2.317 2.316-2.182zm-2.586-2.244L5.115 1.768l12.39 7.08-2.586 2.586z"/>
           </svg>
-          Get App on Google Play
+          Get on Google Play Store
         </a>
       </div>
 
@@ -87,7 +88,7 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
     </div>
   </section>
 
-  <!-- Client-side deep link resolver -->
+  <!-- Client-side Smart App Detection & Fallback -->
   <script is:inline>
     (function() {
       var urlParams = new URLSearchParams(window.location.search);
@@ -103,32 +104,83 @@ import FlowRupeeLayout from '../../layouts/FlowRupeeLayout.astro';
         schemeTarget = '(tabs)/transactions';
       } else if (screen === 'settings') {
         schemeTarget = 'settings';
+      } else if (screen === 'scan' || screen === 'qr') {
+        schemeTarget = 'scan';
       } else if (path) {
         schemeTarget = path.replace(/^\//, '');
       }
 
-      var deepLinkUrl = 'flowrupee://' + schemeTarget;
+      var playStoreUrl = 'https://play.google.com/store/apps/details?id=online.jiapp.flowrupee';
+      var schemeUrl = 'flowrupee://' + schemeTarget;
+      
+      // Android Intent with native Play Store fallback
+      var intentUrl = 'intent://' + schemeTarget + '#Intent;scheme=flowrupee;package=online.jiapp.flowrupee;S.browser_fallback_url=' + encodeURIComponent(playStoreUrl) + ';end';
 
       var btn = document.getElementById('open-app-btn');
       if (btn) {
-        btn.href = deepLinkUrl;
+        btn.href = schemeUrl;
       }
 
       var statusText = document.getElementById('status-text');
+      var helperText = document.getElementById('helper-text');
+      var userAgent = navigator.userAgent || '';
+      var isAndroid = /Android/i.test(userAgent);
+      var isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+      var isMobile = isAndroid || isIOS;
 
-      // Attempt immediate app open on mobile
-      var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      if (isMobile) {
-        window.location.href = deepLinkUrl;
-        setTimeout(function() {
-          if (statusText) {
-            statusText.textContent = 'Ready to launch';
+      if (!isMobile) {
+        if (statusText) statusText.textContent = 'Desktop View';
+        if (helperText) helperText.textContent = 'This link is optimized for mobile. Scan or visit on your phone to open FlowRupee directly.';
+        return;
+      }
+
+      if (isAndroid) {
+        // Trigger Android intent: opens FlowRupee if installed, or Play Store if not installed
+        if (statusText) statusText.textContent = 'Opening FlowRupee...';
+        window.location.href = intentUrl;
+
+        // Safety fallback timer if intent URI did not trigger automatically
+        var fallbackTimer = setTimeout(function() {
+          if (!document.hidden) {
+            if (statusText) statusText.textContent = 'Redirecting to Google Play...';
+            window.location.href = playStoreUrl;
           }
-        }, 2000);
+        }, 2200);
+
+        var cancelFallback = function() {
+          clearTimeout(fallbackTimer);
+          if (statusText) statusText.textContent = 'Opened in FlowRupee';
+        };
+
+        window.addEventListener('visibilitychange', function() {
+          if (document.hidden) cancelFallback();
+        });
+        window.addEventListener('pagehide', cancelFallback);
+        window.addEventListener('blur', cancelFallback);
       } else {
-        if (statusText) {
-          statusText.textContent = 'Mobile Deep Link';
-        }
+        // iOS or alternative browser
+        if (statusText) statusText.textContent = 'Opening FlowRupee...';
+        var startTime = Date.now();
+        window.location.href = schemeUrl;
+
+        var timer = setTimeout(function() {
+          var elapsed = Date.now() - startTime;
+          if (!document.hidden && elapsed < 2800) {
+            if (statusText) statusText.textContent = 'Opening Google Play...';
+            window.location.href = playStoreUrl;
+          }
+        }, 1800);
+
+        var cancelTimer = function() {
+          clearTimeout(timer);
+          if (statusText) statusText.textContent = 'Opened in FlowRupee';
+        };
+
+        window.addEventListener('visibilitychange', function() {
+          if (document.hidden) cancelTimer();
+        });
+        window.addEventListener('pagehide', cancelTimer);
+        window.addEventListener('blur', cancelTimer);
       }
     })();
   </script>
