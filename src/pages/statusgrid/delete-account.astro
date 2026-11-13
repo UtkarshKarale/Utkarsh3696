@@ -1,0 +1,143 @@
+---
+// StatusGrid Account & Data Deletion
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>Request Account &amp; Data Deletion — StatusGrid</title>
+  <meta name="description" content="Guidelines and steps for users to request permanent deletion of their StatusGrid account, saved profiles, and personal data.">
+  <link rel="canonical" href="https://utkarshkarale.github.io/statusgrid/delete-account">
+  <link rel="icon" type="image/png" href="/statusgrid-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Request Account &amp; Data Deletion — StatusGrid">
+  <meta property="og:description" content="Steps to delete your StatusGrid account and personal data.">
+  <meta property="og:url" content="https://utkarshkarale.github.io/statusgrid/delete-account">
+  <meta property="og:image" content="https://utkarshkarale.github.io/statusgrid-icon.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #040d08;
+      --paper: #081710;
+      --ink: #e2f0e8;
+      --muted: #8ca396;
+      --emerald: #10b981;
+      --line: #133324;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 620px;
+      width: 100%;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .logo {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      margin-bottom: 1.25rem;
+      border-radius: 16px;
+    }
+    h1 {
+      font-size: 1.65rem;
+      margin: 0 0 0.75rem;
+      color: #fff;
+      font-weight: 800;
+    }
+    .intro {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: #05130b;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.25rem;
+      text-align: left;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+    .card h2 {
+      font-size: 1rem;
+      color: var(--emerald);
+      margin: 0 0 0.5rem;
+    }
+    ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.25rem;
+      color: var(--muted);
+    }
+    li { padding: 2px 0; }
+    .email-box {
+      background: #0c261b;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      border-radius: 10px;
+      padding: 0.75rem;
+      margin: 1.25rem 0;
+      font-family: monospace;
+      font-size: 1rem;
+      color: var(--emerald);
+      word-break: break-all;
+    }
+    a { color: var(--emerald); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+    .back-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="/statusgrid-icon.png" alt="StatusGrid Logo" class="logo" />
+    <h1>Request Account &amp; Data Deletion</h1>
+    <p class="intro">You have full control over your personal information. Follow the instructions below to request permanent deletion of your StatusGrid account and all associated profile records.</p>
+    
+    <div class="card">
+      <h2>How to submit a deletion request:</h2>
+      <p style="margin:0 0 8px;">Send an email from your registered StatusGrid email address to our data protection team at:</p>
+      <div class="email-box">karaleutkarsh3696@gmail.com</div>
+      <p style="margin:8px 0 0; font-size:0.85rem; color:var(--muted);">Subject line: <strong>StatusGrid Account Deletion Request</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>What data will be deleted:</h2>
+      <ul>
+        <li><strong>Account credentials:</strong> Your user ID, email address, and authentication tokens.</li>
+        <li><strong>Profile customization:</strong> Your saved name, title/designation, and phone or social media handles.</li>
+        <li><strong>Profile photo:</strong> Any avatar or profile cutout stored in our backend.</li>
+        <li><strong>Device push tokens:</strong> Notification tokens registered with FCM.</li>
+      </ul>
+      <p style="margin:10px 0 0; font-size:0.85rem; color:var(--muted);">All records are permanently removed from our Cloudflare D1 database and Firebase Authentication within <strong>24 to 48 hours</strong>.</p>
+    </div>
+
+    <div>
+      <a href="/statusgrid" class="back-btn">&larr; Back to StatusGrid</a> &bull; 
+      <a href="/statusgrid/privacy" class="back-btn">Privacy Policy</a>
+    </div>
+  </div>
+</body>
+</html>

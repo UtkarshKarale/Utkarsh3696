@@ -28,6 +28,7 @@ const pageDefinitions = [
   { loc: `${site}/statusgrid`, file: 'src/pages/statusgrid/index.astro', priority: '1.0', changefreq: 'weekly' },
   { loc: `${site}/statusgrid/privacy`, file: 'src/pages/statusgrid/privacy.astro', priority: '0.9', changefreq: 'monthly' },
   { loc: `${site}/statusgrid/terms`, file: 'src/pages/statusgrid/terms.astro', priority: '0.8', changefreq: 'monthly' },
+  { loc: `${site}/statusgrid/delete-account`, file: 'src/pages/statusgrid/delete-account.astro', priority: '0.8', changefreq: 'monthly' },
   { loc: `${site}/projects/flowrupee`, file: 'src/content/projects/flowrupee.md', priority: '1.0', changefreq: 'weekly' },
   { loc: `${site}/projects/statusgrid`, file: 'src/content/projects/statusgrid.md', priority: '1.0', changefreq: 'weekly' },
   { loc: `${site}/leadpluck`, file: 'src/pages/leadpluck/index.astro', priority: '1.0', changefreq: 'weekly' },
