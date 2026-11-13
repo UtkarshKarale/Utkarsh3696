@@ -12,13 +12,31 @@
   </url>
   <url>
     <loc>https://utkarshkarale.github.io/flowrupee</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://utkarshkarale.github.io/statusgrid</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://utkarshkarale.github.io/statusgrid/privacy</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://utkarshkarale.github.io/statusgrid/terms</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://utkarshkarale.github.io/projects/flowrupee</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -54,13 +72,13 @@
   </url>
   <url>
     <loc>https://utkarshkarale.github.io/blog/automatic-expense-tracking-sms-india/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://utkarshkarale.github.io/blog/why-personal-finance-tracking-fails-in-india-flowrupee/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -84,7 +102,7 @@
   </url>
   <url>
     <loc>https://utkarshkarale.github.io/blog/ssh-cloudflare-tunnel/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>

@@ -1,0 +1,166 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'StatusGrid — Personalized Festival & Daily WhatsApp Status Poster Maker',
+  description = 'Create stunning, high-resolution festival and daily greeting posters in Marathi, Hindi & English in seconds. Cutout portraits, 8+ banner frames, drag-and-drop studio, and 1-tap WhatsApp sharing.'
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="statusgrid, festival poster maker, whatsapp status creator, marathi festival banner, diwali status creator, good morning status maker, shiv jayanti poster, gudi padwa banner, birthday status editor, online poster maker marathi, background removal status" />
+    <meta name="author" content="Utkarsh Karale" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://utkarshkarale.github.io/statusgrid" />
+    <link rel="icon" type="image/png" href="/statusgrid-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="StatusGrid" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://utkarshkarale.github.io/statusgrid" />
+    <meta property="og:image" content="https://utkarshkarale.github.io/statusgrid-icon.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://utkarshkarale.github.io/statusgrid-icon.png" />
+
+    <!-- Structured Data: SoftwareApplication & FAQ -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "StatusGrid",
+          "operatingSystem": "Android, Web, PWA",
+          "applicationCategory": "DesignApplication, MultimediaApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "description": "Fast, privacy-friendly festival and daily WhatsApp status poster creator with automatic photo cutout masking, 8+ banner styles, and 1-tap WhatsApp sharing in Marathi, Hindi & English.",
+          "url": "https://statusgrid.pages.dev",
+          "author": {
+            "@type": "Person",
+            "name": "Utkarsh Karale",
+            "url": "https://utkarshkarale.github.io/"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is StatusGrid and what can I create with it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "StatusGrid is a high-resolution personalized poster maker designed for Indian festivals (Diwali, Shiv Jayanti, Ganesh Chaturthi, Gudi Padwa) and daily greetings (Good Morning, Motivational Quotes, Birthday wishes). You can add your own photo, name, title, and contact details with 1 tap."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does StatusGrid ask for storage and media permissions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "StatusGrid requests media access only so you can pick your own portrait photo from your gallery to place on your poster, and storage permission only to save the finished 1080p HD poster into your device's Gallery. StatusGrid never scans or uploads your private photo library in the background."
+              }
+            }
+          ]
+        }
+      ]
+    })} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#05110c] text-[#e1efe8] font-sans antialiased min-h-screen flex flex-col selection:bg-emerald-500 selection:text-black">
+    
+    <!-- Top Global App Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-[#05110c]/85 backdrop-blur-md border-b border-emerald-950/80">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/statusgrid" class="flex items-center gap-3 group">
+          <img 
+            src="/statusgrid-icon.png" 
+            alt="StatusGrid Logo" 
+            class="w-9 h-9 rounded-xl object-contain shadow-md shadow-emerald-900/30 group-hover:scale-105 transition-transform" 
+          />
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-black tracking-tight text-white">StatusGrid</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Studio</span>
+          </div>
+        </a>
+
+        <nav class="flex items-center gap-5 sm:gap-6">
+          <a href="/" class="text-xs font-semibold text-zinc-400 hover:text-white transition-colors hidden lg:flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Portfolio
+          </a>
+          <a href="/statusgrid#features" class="text-xs font-semibold text-zinc-400 hover:text-white transition-colors hidden sm:block">
+            Features
+          </a>
+          <a href="/statusgrid#permissions" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors hidden md:block">
+            Permissions &amp; Safety
+          </a>
+          <a href="/statusgrid/privacy" class="text-xs font-semibold text-zinc-400 hover:text-white transition-colors">
+            Privacy
+          </a>
+          <a href="/statusgrid/terms" class="text-xs font-semibold text-zinc-400 hover:text-white transition-colors hidden sm:block">
+            Terms
+          </a>
+          <a 
+            href="https://statusgrid.pages.dev" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="inline-flex items-center gap-1.5 text-xs font-bold px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black shadow-lg shadow-emerald-500/25 transition-all hover:scale-105"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open Web App
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-grow pt-16">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-emerald-950/90 bg-[#030906] py-12 text-zinc-400 text-xs">
+      <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <img src="/statusgrid-icon.png" alt="StatusGrid" class="w-6 h-6 object-contain rounded-md" />
+          <p class="text-zinc-400">&copy; {currentYear} StatusGrid. Package: <code class="text-emerald-400">in.statusgrid.app</code> &bull; Built by <a href="/" class="text-emerald-400 hover:underline">Utkarsh Karale</a></p>
+        </div>
+
+        <div class="flex items-center gap-5 font-medium flex-wrap justify-center">
+          <a href="/statusgrid" class="hover:text-white transition-colors">Home</a>
+          <a href="/statusgrid#permissions" class="hover:text-white transition-colors">Device Permissions</a>
+          <a href="/statusgrid/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="/statusgrid/terms" class="hover:text-white transition-colors">Terms of Service</a>
+          <a href="/projects/statusgrid" class="hover:text-white transition-colors">Tech Specs</a>
+          <a href="/" class="hover:text-white transition-colors">Developer Profile</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+---
+// StatusGrid Privacy Policy
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#05110c">
+  <title>Privacy Policy — StatusGrid Festival & Daily Status Maker</title>
+  <meta name="description" content="Learn how StatusGrid protects your privacy, why we request storage and media permissions, our client-side canvas rendering, and zero-data-selling guarantee.">
+  <link rel="canonical" href="https://utkarshkarale.github.io/statusgrid/privacy">
+  <link rel="icon" type="image/png" href="/statusgrid-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Privacy Policy — StatusGrid Festival & Daily Status Maker">
+  <meta property="og:description" content="Detailed disclosure of device permissions, data handling, client-side rendering, and user rights in StatusGrid.">
+  <meta property="og:url" content="https://utkarshkarale.github.io/statusgrid/privacy">
+  <meta property="og:image" content="https://utkarshkarale.github.io/statusgrid-icon.png">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #040d08;
+      --paper: #081710;
+      --ink: #e2f0e8;
+      --muted: #8ca396;
+      --emerald: #10b981;
+      --pale: #0c261b;
+      --line: #133324;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.7 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--emerald); text-underline-offset: 3px; }
+    .top {
+      background: linear-gradient(135deg, #061910, #040d08);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav, .hero, .content, .footer {
+      width: min(900px, calc(100% - 36px));
+      margin: auto;
+    }
+    .nav {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      font-size: 20px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+    .nav a:last-child {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .hero { padding: 48px 0 36px; }
+    .eyebrow {
+      display: inline-block;
+      background: var(--pale);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(32px, 5.5vw, 48px);
+      line-height: 1.15;
+      letter-spacing: -.04em;
+      margin: 16px 0 12px;
+      color: #fff;
+    }
+    .intro {
+      font-size: 17px;
+      max-width: 700px;
+      color: var(--muted);
+      margin: 0;
+    }
+    .meta {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+    .content { padding: 28px 0 64px; }
+    article {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: clamp(20px, 4vw, 36px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    }
+    h2 {
+      font-size: 21px;
+      line-height: 1.3;
+      letter-spacing: -.02em;
+      margin: 34px 0 10px;
+      color: #fff;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    h2:first-child { margin-top: 0; }
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--emerald);
+      margin: 18px 0 6px;
+    }
+    p { margin: 8px 0 12px; }
+    ul { padding-left: 20px; margin: 8px 0 14px; }
+    li { padding: 3px 0; }
+    .callout {
+      background: var(--pale);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    .perm-badge {
+      font-family: monospace;
+      font-size: 12px;
+      background: #04120a;
+      border: 1px solid var(--line);
+      color: var(--emerald);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 36px;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media(max-width: 520px) {
+      .hero { padding-top: 32px; }
+      .nav { align-items: flex-start; }
+      .intro { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="/statusgrid" aria-label="StatusGrid home">
+        <img src="/statusgrid-icon.png" alt="StatusGrid Logo" />
+        <span>StatusGrid</span>
+      </a>
+      <div style="display:flex; gap:16px;">
+        <a href="/statusgrid">Landing Page</a>
+        <a href="/statusgrid/terms">Terms of Service</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <span class="eyebrow">Trust, Privacy &amp; Permissions</span>
+      <h1>Privacy Policy</h1>
+      <p class="intro">Your personal photos and identity belong to you. This policy outlines what data StatusGrid accesses, why specific Android device permissions are required, and our strict zero-data-selling guarantee.</p>
+      <p class="meta">Effective date: 13 November 2026 &bull; App: StatusGrid &bull; Package: <code>in.statusgrid.app</code> &bull; Web: <code>statusgrid.pages.dev</code></p>
+    </div>
+  </header>
+
+  <main class="content">
+    <article>
+      <h2>1. About StatusGrid &amp; Scope</h2>
+      <p>StatusGrid (operated by developer Utkarsh Karale) is a social media greeting and personalized status poster creator designed for Indian festivals (Diwali, Chhatrapati Shivaji Maharaj Jayanti, Ganesh Chaturthi, Gudi Padwa, Eid, Christmas) and daily greetings (Good Morning, Quotes, Birthdays). StatusGrid is available as a Progressive Web App (PWA) at <a href="https://statusgrid.pages.dev" target="_blank" rel="noopener">statusgrid.pages.dev</a> and as an Android application (package: <code>in.statusgrid.app</code>).</p>
+      <p>This Privacy Policy explains how we process information when you use our web applications, Android applications, or related services.</p>
+
+      <h2>2. Explicit Disclosures for Device Permissions (Android &amp; Web)</h2>
+      <p>To provide poster customization, photo placement, and export functionality, StatusGrid requests specific device permissions. We request only the absolute minimum permissions necessary:</p>
+
+      <h3>A. Photos and Media Library Access (<span class="perm-badge">READ_MEDIA_IMAGES</span> / <span class="perm-badge">READ_EXTERNAL_STORAGE</span>)</h3>
+      <ul>
+        <li><strong>Why it is requested:</strong> When you choose to customize a festival banner with your own picture or organizational logo, StatusGrid opens your device's photo picker so you can select the specific image file.</li>
+        <li><strong>Privacy Guarantee:</strong> StatusGrid <strong>NEVER</strong> scans, indexes, browses, or reads your personal photo gallery in the background. Only the single photo that you actively tap and select is loaded into the device memory for canvas rendering.</li>
+      </ul>
+
+      <h3>B. Save Image to Device Storage (<span class="perm-badge">WRITE_EXTERNAL_STORAGE</span> / <span class="perm-badge">SavePhotosPermission</span>)</h3>
+      <ul>
+        <li><strong>Why it is requested:</strong> When you tap the "Download" or "HD डाऊनलोड" button, StatusGrid needs permission to write the newly composed 1080x1080 high-resolution poster (PNG/JPEG) into your device's <code>Pictures</code> or <code>Gallery</code> directory so you can access it offline.</li>
+        <li><strong>Privacy Guarantee:</strong> StatusGrid only writes the newly created image file generated by you. We never modify, overwrite, or access any existing personal files or folders on your device.</li>
+      </ul>
+
+      <h3>C. Push Notifications (<span class="perm-badge">POST_NOTIFICATIONS</span>)</h3>
+      <ul>
+        <li><strong>Why it is requested:</strong> To notify you of upcoming festive occasions (such as Diwali festivities, Chhatrapati Shivaji Maharaj Jayanti, Gudi Padwa) and daily morning suvichar updates, ensuring you have your greeting banner ready on time.</li>
+        <li><strong>Privacy Guarantee:</strong> StatusGrid does not send third-party commercial advertisements. You can disable notifications at any time in your phone's Android System Settings or in the app.</li>
+      </ul>
+
+      <h3>D. Video &amp; Audio Processing (<span class="perm-badge">READ_MEDIA_VIDEO</span>)</h3>
+      <ul>
+        <li><strong>Why it is requested:</strong> Optional. Used exclusively if you utilize the Video Status Studio feature to extract background music from a video clip or attach audio to an animated festival status.</li>
+        <li><strong>Privacy Guarantee:</strong> Audio and video encoding executes locally in-browser or on-device. Raw media files are not uploaded to public storage.</li>
+      </ul>
+
+      <h3>E. Internet Connectivity (<span class="perm-badge">INTERNET</span> / <span class="perm-badge">ACCESS_NETWORK_STATE</span>)</h3>
+      <ul>
+        <li><strong>Why it is requested:</strong> To download high-resolution festival templates from our Cloudflare CDN, check for daily generic suvichar updates, authenticate user accounts, and execute WhatsApp share intents.</li>
+      </ul>
+
+      <h2>3. Information We Collect &amp; How It Is Handled</h2>
+      <p>Depending on how you use StatusGrid, we may collect:</p>
+      <ul>
+        <li><strong>User Profile Data:</strong> Name, phone number or social media handles (e.g. WhatsApp, Instagram, Facebook), title or designation (e.g., 'समाजसेवक', 'उद्योजक', 'मित्रपरिवार'), and optional profile photo/cutout. This information is entered by you to personalize your footer banner.</li>
+        <li><strong>Account Authentication:</strong> If you sign in via Google or Email (powered by Firebase Authentication), we store your email address and authentication identifier to restore your profile across sessions and devices.</li>
+        <li><strong>Device &amp; Telemetry Data:</strong> Standard connection metrics (IP address, browser type, operating system) generated during standard web requests, cached via Cloudflare CDN for performance optimization and DDoS mitigation.</li>
+      </ul>
+
+      <h2>4. Client-Side Canvas Rendering (Privacy by Design)</h2>
+      <div class="callout">
+        <strong>Client-Side Processing Notice:</strong><br>
+        All image compositing, background cutout masking, typography layout, and frame placement in StatusGrid are rendered <strong>locally on your device</strong> using HTML5 Canvas technology (<code>canvas.js</code>). Your unedited personal portraits are not stored on our public databases or accessible to other users.
+      </div>
+
+      <h2>5. Zero Data Selling &amp; Third-Party Disclosures</h2>
+      <p>We operate with a strict privacy-first standard:</p>
+      <ul>
+        <li><strong>No Data Selling:</strong> StatusGrid <strong>NEVER sells, rents, monetizes, or trades</strong> your personal information, phone numbers, email addresses, or photos to third-party data brokers, marketing agencies, or advertisers.</li>
+        <li><strong>No Third-Party Ad Networks:</strong> StatusGrid does not embed third-party ad tracking SDKs (such as AdMob, Meta Audience Network, or programmatic data trackers).</li>
+        <li><strong>Service Providers:</strong> We use reputable infrastructure providers strictly to operate the service:
+          <ul>
+            <li><em>Cloudflare Inc.:</em> For CDN edge distribution, SSL encryption, and API routing.</li>
+            <li><em>Google Firebase:</em> For optional user authentication and session management.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h2>6. Data Retention &amp; Your Right to Deletion</h2>
+      <p>You have full ownership and control over your information:</p>
+      <ul>
+        <li><strong>Profile Editing:</strong> You can edit, update, or remove your name, designation, phone numbers, or photos at any moment inside the StatusGrid Profile settings.</li>
+        <li><strong>Account &amp; Data Deletion:</strong> If you wish to permanently delete your account and all associated profile records from our databases, you may email us directly at <a href="mailto:karaleutkarsh3696@gmail.com">karaleutkarsh3696@gmail.com</a> with the subject line <em>"StatusGrid Account Deletion Request"</em>. All associated data will be permanently purged within 24 to 48 hours.</li>
+      </ul>
+
+      <h2>7. Children's Privacy</h2>
+      <p>StatusGrid is not directed to children under the age of 13. We do not knowingly collect personal identifiable information from children under 13. If you believe a child has provided us with personal information, please contact us immediately, and we will delete the record.</p>
+
+      <h2>8. Policy Updates</h2>
+      <p>We may update this Privacy Policy periodically to reflect app updates, new festival features, or legal requirements. Material changes will be highlighted with an updated effective date at the top of this page.</p>
+
+      <h2>9. Contact Us &amp; Grievance Redressal</h2>
+      <p>For any questions, clarifications, feedback, or data privacy requests concerning StatusGrid, please reach out directly:</p>
+      <ul>
+        <li><strong>Developer:</strong> Utkarsh Karale</li>
+        <li><strong>Email:</strong> <a href="mailto:karaleutkarsh3696@gmail.com">karaleutkarsh3696@gmail.com</a></li>
+        <li><strong>Website:</strong> <a href="https://utkarshkarale.github.io">https://utkarshkarale.github.io</a></li>
+        <li><strong>App URL:</strong> <a href="https://statusgrid.pages.dev">https://statusgrid.pages.dev</a></li>
+        <li><strong>Location:</strong> Maharashtra, India</li>
+      </ul>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div>&copy; 2026 StatusGrid &bull; All Rights Reserved</div>
+    <div style="display:flex; gap:16px;">
+      <a href="/statusgrid">StatusGrid Home</a>
+      <a href="/statusgrid/terms">Terms of Service</a>
+      <a href="/">Utkarsh Karale Portfolio</a>
+    </div>
+  </footer>
+</body>
+</html>

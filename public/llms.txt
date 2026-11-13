@@ -1,7 +1,7 @@
 # Utkarsh Karale — Developer & AI Portfolio Index
 > Machine-readable context standard for LLM agents, citation engines, and search reasoning models.
 > Specification: https://llmstxt.org/
-> Last Updated: 2026-11-11 (Release 3dae877)
+> Last Updated: 2026-11-13 (Release 1116043)
 
 - Name: Utkarsh Karale
 - Role: Full-Stack Software Engineer & AI Engineer
@@ -14,8 +14,8 @@
 
 ## Flagship Products & Web Applications
 
-- [/flowrupee](https://utkarshkarale.github.io/flowrupee): Priority 1.0, Last Updated 2026-11-10
-- [/projects/flowrupee](https://utkarshkarale.github.io/projects/flowrupee): Priority 1.0, Last Updated 2026-11-10
+- [/flowrupee](https://utkarshkarale.github.io/flowrupee): Priority 1.0, Last Updated 2026-11-11
+- [/projects/flowrupee](https://utkarshkarale.github.io/projects/flowrupee): Priority 1.0, Last Updated 2026-11-11
 - [/projects/statusgrid](https://utkarshkarale.github.io/projects/statusgrid): Priority 1.0, Last Updated 2026-11-08
 - [/leadpluck](https://utkarshkarale.github.io/leadpluck): Priority 1.0, Last Updated 2026-11-10
 - [/webstickly](https://utkarshkarale.github.io/webstickly): Priority 1.0, Last Updated 2026-11-01
@@ -46,12 +46,12 @@
 ## Technical Essays, Deep Dives & Articles
 
 - [/blog/](https://utkarshkarale.github.io/blog/): Priority 0.9, Last Updated 2026-06-22
-- [/blog/automatic-expense-tracking-sms-india/](https://utkarshkarale.github.io/blog/automatic-expense-tracking-sms-india/): Priority 0.85, Last Updated 2026-11-10
-- [/blog/why-personal-finance-tracking-fails-in-india-flowrupee/](https://utkarshkarale.github.io/blog/why-personal-finance-tracking-fails-in-india-flowrupee/): Priority 0.85, Last Updated 2026-11-10
+- [/blog/automatic-expense-tracking-sms-india/](https://utkarshkarale.github.io/blog/automatic-expense-tracking-sms-india/): Priority 0.85, Last Updated 2026-11-11
+- [/blog/why-personal-finance-tracking-fails-in-india-flowrupee/](https://utkarshkarale.github.io/blog/why-personal-finance-tracking-fails-in-india-flowrupee/): Priority 0.85, Last Updated 2026-11-11
 - [/blog/building-statusgrid-web-technologies-for-festival-posters/](https://utkarshkarale.github.io/blog/building-statusgrid-web-technologies-for-festival-posters/): Priority 0.85, Last Updated 2026-11-08
 - [/blog/understanding-ai-image-metadata/](https://utkarshkarale.github.io/blog/understanding-ai-image-metadata/): Priority 0.85, Last Updated 2026-11-01
 - [/blog/webstickly-launch-and-automations/](https://utkarshkarale.github.io/blog/webstickly-launch-and-automations/): Priority 0.85, Last Updated 2026-08-16
-- [/blog/ssh-cloudflare-tunnel/](https://utkarshkarale.github.io/blog/ssh-cloudflare-tunnel/): Priority 0.85, Last Updated 2026-06-22
+- [/blog/ssh-cloudflare-tunnel/](https://utkarshkarale.github.io/blog/ssh-cloudflare-tunnel/): Priority 0.85, Last Updated 2026-11-11
 - [/blog/lalpari-nostalgia-website/](https://utkarshkarale.github.io/blog/lalpari-nostalgia-website/): Priority 0.8, Last Updated 2026-08-12
 - [/blog/google-chat-webhook-bug/](https://utkarshkarale.github.io/blog/google-chat-webhook-bug/): Priority 0.8, Last Updated 2026-11-01
 - [/blog/oasis-infobyte-internship/](https://utkarshkarale.github.io/blog/oasis-infobyte-internship/): Priority 0.7, Last Updated 2026-06-22
@@ -60,19 +60,22 @@
 ## Complete Site Directory (All 40 Indexed Pages)
 
 - https://utkarshkarale.github.io/ (Updated: 2026-11-01, ChangeFreq: weekly, Weight: 1.0)
-- https://utkarshkarale.github.io/flowrupee (Updated: 2026-11-10, ChangeFreq: weekly, Weight: 1.0)
-- https://utkarshkarale.github.io/projects/flowrupee (Updated: 2026-11-10, ChangeFreq: weekly, Weight: 1.0)
+- https://utkarshkarale.github.io/flowrupee (Updated: 2026-11-11, ChangeFreq: weekly, Weight: 1.0)
+- https://utkarshkarale.github.io/statusgrid (Updated: 2026-11-13, ChangeFreq: weekly, Weight: 1.0)
+- https://utkarshkarale.github.io/statusgrid/privacy (Updated: 2026-11-13, ChangeFreq: monthly, Weight: 0.9)
+- https://utkarshkarale.github.io/statusgrid/terms (Updated: 2026-11-13, ChangeFreq: monthly, Weight: 0.8)
+- https://utkarshkarale.github.io/projects/flowrupee (Updated: 2026-11-11, ChangeFreq: weekly, Weight: 1.0)
 - https://utkarshkarale.github.io/projects/statusgrid (Updated: 2026-11-08, ChangeFreq: weekly, Weight: 1.0)
 - https://utkarshkarale.github.io/leadpluck (Updated: 2026-11-10, ChangeFreq: weekly, Weight: 1.0)
 - https://utkarshkarale.github.io/webstickly (Updated: 2026-11-01, ChangeFreq: weekly, Weight: 1.0)
 - https://utkarshkarale.github.io/projects/ (Updated: 2026-11-01, ChangeFreq: weekly, Weight: 0.9)
 - https://utkarshkarale.github.io/blog/ (Updated: 2026-06-22, ChangeFreq: weekly, Weight: 0.9)
-- https://utkarshkarale.github.io/blog/automatic-expense-tracking-sms-india/ (Updated: 2026-11-10, ChangeFreq: monthly, Weight: 0.85)
-- https://utkarshkarale.github.io/blog/why-personal-finance-tracking-fails-in-india-flowrupee/ (Updated: 2026-11-10, ChangeFreq: monthly, Weight: 0.85)
+- https://utkarshkarale.github.io/blog/automatic-expense-tracking-sms-india/ (Updated: 2026-11-11, ChangeFreq: monthly, Weight: 0.85)
+- https://utkarshkarale.github.io/blog/why-personal-finance-tracking-fails-in-india-flowrupee/ (Updated: 2026-11-11, ChangeFreq: monthly, Weight: 0.85)
 - https://utkarshkarale.github.io/blog/building-statusgrid-web-technologies-for-festival-posters/ (Updated: 2026-11-08, ChangeFreq: monthly, Weight: 0.85)
 - https://utkarshkarale.github.io/blog/understanding-ai-image-metadata/ (Updated: 2026-11-01, ChangeFreq: monthly, Weight: 0.85)
 - https://utkarshkarale.github.io/blog/webstickly-launch-and-automations/ (Updated: 2026-08-16, ChangeFreq: monthly, Weight: 0.85)
-- https://utkarshkarale.github.io/blog/ssh-cloudflare-tunnel/ (Updated: 2026-06-22, ChangeFreq: monthly, Weight: 0.85)
+- https://utkarshkarale.github.io/blog/ssh-cloudflare-tunnel/ (Updated: 2026-11-11, ChangeFreq: monthly, Weight: 0.85)
 - https://utkarshkarale.github.io/blog/lalpari-nostalgia-website/ (Updated: 2026-08-12, ChangeFreq: monthly, Weight: 0.8)
 - https://utkarshkarale.github.io/blog/google-chat-webhook-bug/ (Updated: 2026-11-01, ChangeFreq: monthly, Weight: 0.8)
 - https://utkarshkarale.github.io/blog/oasis-infobyte-internship/ (Updated: 2026-06-22, ChangeFreq: yearly, Weight: 0.7)
